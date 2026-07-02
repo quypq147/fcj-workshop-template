@@ -53,7 +53,7 @@ pre: " <b> 1.8. </b> "
 
 <!-- BEGIN EXCEL PROGRESS -->
 
-**Cập nhật từ Excel**
+**Update from Excel**
 
 - - Learn Serverless Doc Mgmt System Series  
     

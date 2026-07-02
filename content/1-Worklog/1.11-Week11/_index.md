@@ -53,7 +53,7 @@ pre: " <b> 1.11. </b> "
 
 <!-- BEGIN EXCEL PROGRESS -->
 
-**Cập nhật từ Excel**
+**Update from Excel**
 
 - - Learn Business Intelligence & Serverless Analytics  
     

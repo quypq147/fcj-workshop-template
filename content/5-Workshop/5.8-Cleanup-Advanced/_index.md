@@ -1,5 +1,5 @@
 ---
-title: "Dọn dẹp & Nâng cao"
+title: "Cleanup & Advanced"
 date: 2026-01-01
 weight: 8
 chapter: false

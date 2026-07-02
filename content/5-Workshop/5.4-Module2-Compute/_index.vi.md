@@ -7,7 +7,7 @@ pre: " <b> 5.4. </b> "
 ---
 # Module 2: Compute & API Gateway (Tính toán & Giao diện API)
 
-Thiết lập Lambda function và liên kết với API Gateway. Vì sử dụng kiến trúc Serverless thuần túy, Lambda sẽ chạy ở chế độ mặc định trên mạng AWS mà không cần đặt trong VPC, cho phép gọi trực tiếp tới DynamoDB một cách nhanh chóng.
+Thiết lập Lambda function và liên kết với API Gateway. Vì sử dụng kiến trúc Serverless thuần túy, Lambda sẽ chạy ở chế độ mặc định trên mạng AWS, cho phép gọi trực tiếp tới DynamoDB một cách nhanh chóng.
 
 Tạo tệp `lib/api-stack.ts`:
 ```typescript

@@ -1,5 +1,5 @@
 ---
-title: "Triển khai & Kiểm thử"
+title: "Deployment & Testing"
 date: 2026-01-01
 weight: 7
 chapter: false

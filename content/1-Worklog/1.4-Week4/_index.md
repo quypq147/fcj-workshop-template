@@ -53,7 +53,7 @@ pre: " <b> 1.4. </b> "
 
 <!-- BEGIN EXCEL PROGRESS -->
 
-**Cập nhật từ Excel**
+**Update from Excel**
 
 - - Learn Infrastructure as Code (IaC)  
     

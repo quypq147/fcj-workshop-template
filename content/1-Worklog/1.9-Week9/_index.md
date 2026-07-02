@@ -53,7 +53,7 @@ pre: " <b> 1.9. </b> "
 
 <!-- BEGIN EXCEL PROGRESS -->
 
-**Cập nhật từ Excel**
+**Update from Excel**
 
 - - Learn Amazon Lightsail Containers & ECS Basics  
     
