@@ -19,13 +19,13 @@ chapter: false
 
 &emsp; **Ngành:** Công Nghệ Thông Tin
 
-&emsp; **Lớp:** AWS082025
+&emsp; **Lớp:** 22DTHG8
 
 &emsp; **Công Ty Thực Tập:** Amazon Web Services Vietnam Co., Ltd.
 
 &emsp; **Vị trí thực tập:** FCJ Cloud Intern
 
-&emsp; **Thời gian thực tập:** From 17/04/2026 to 09/07/2026
+&emsp; **Thời gian thực tập:** From 17/04/2026 đến 09/07/2026
 
 ![Your profile picture](/images/avatar.png)
 

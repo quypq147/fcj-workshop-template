@@ -52,7 +52,7 @@ Thay vì sử dụng các mô hình Container (như ECS, EKS) hoặc Microservic
 
 #### 3.2. Sơ đồ kiến trúc hệ thống chính thức (v3)
 
-![AWS Serverless E-commerce Architecture v3](architecture.png)
+![AWS Serverless E-commerce Architecture v3](/images/2-Proposal/architecture.png)
 
 > **Lưu ý triển khai:** AWS WAF được cấu hình ở tầng biên để bảo vệ ứng dụng, liên kết trực tiếp với CloudFront (phân phối bởi AWS Amplify) và REST endpoints của Amazon API Gateway.
 

@@ -52,7 +52,7 @@ Instead of using containerized microservices (such as ECS or EKS) which require 
 
 #### 3.2. Official System Architecture Diagram (v3)
 
-![AWS Serverless E-commerce Architecture v3](architecture.png)
+![AWS Serverless E-commerce Architecture v3](/images/2-Proposal/architecture.png)
 
 > **Implementation Note:** AWS WAF is logically bound at the edge to protect API endpoints and content delivery, linking with AWS Amplify's CloudFront distribution and Amazon API Gateway REST endpoints.
 
