@@ -10,7 +10,7 @@ pre: " <b> 5.1. </b> "
 ### 1. Why AWS CDK?
 Traditionally, Infrastructure as Code (IaC) relied on static YAML/JSON templates. **AWS CDK** allows developers to define cloud resources using familiar programming languages like **TypeScript**. This brings strong typing, autocompletion, inheritance, and code reuse to cloud infrastructure definition.
 
-### 2. E-Commerce Serverless Architecture (v3)
-In modern E-Commerce, traffic is highly volatile. This workshop demonstrates a **Serverless Architecture** that co-scales automatically and guarantees high availability across 2 Availability Zones (AZs) without active server administration.
+### 2. Serverless Event-Driven Architecture
+Modern web applications require high reliability and cost-efficiency. This workshop demonstrates a **Serverless Event-Driven Architecture** that scales automatically to handle traffic spikes and guarantees high availability without active server administration.
 
-![Architecture Logic](/images/architecture.png)
+We will use Amazon API Gateway for REST endpoints, AWS Lambda for serverless compute, Amazon DynamoDB for scalable single-table data storage, Amazon SQS for message queuing, and Amazon EventBridge for custom event routing.

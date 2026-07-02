@@ -8,7 +8,7 @@ pre: " <b> 5.8. </b> "
 # Dọn dẹp tài nguyên & Chủ đề nâng cao
 
 ### 1. Dọn dẹp tài nguyên
-Để tránh các chi phí phát sinh ngoài ý muốn (đặc biệt là chi phí NAT Gateway), hãy phá hủy toàn bộ tài nguyên khi kết thúc bài thực hành:
+Để tránh các chi phí phát sinh ngoài ý muốn, hãy phá hủy toàn bộ tài nguyên khi kết thúc bài thực hành:
 ```bash
 cdk destroy --all
 ```
@@ -19,16 +19,15 @@ Tạo tệp `test/infra.test.ts`:
 ```typescript
 import * as cdk from 'aws-cdk-lib';
 import { Template } from 'aws-cdk-lib/assertions';
-import * as Network from '../lib/network-stack';
+import * as Storage from '../lib/storage-stack';
 
-test('VPC configuration is correct', () => {
+test('DynamoDB table configuration is correct', () => {
   const app = new cdk.App();
-  const stack = new Network.NetworkStack(app, 'TestStack');
+  const stack = new Storage.StorageStack(app, 'TestStack');
   const template = Template.fromStack(stack);
 
-  template.hasResourceProperties('AWS::EC2::VPC', {
-    EnableDnsSupport: true,
-    EnableDnsHostnames: true,
+  template.hasResourceProperties('AWS::DynamoDB::Table', {
+    BillingMode: 'PAY_PER_REQUEST',
   });
 });
 ```

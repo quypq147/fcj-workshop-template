@@ -1,18 +1,17 @@
 ---
-title: "Module 3: Compute & API"
+title: "Module 2: Tính toán & API"
 date: 2026-01-01
-weight: 5
+weight: 4
 chapter: false
-pre: " <b> 5.5. </b> "
+pre: " <b> 5.4. </b> "
 ---
-# Module 3: Compute & API Gateway (Tính toán & Giao diện API)
+# Module 2: Compute & API Gateway (Tính toán & Giao diện API)
 
-Định nghĩa Lambda chạy trong Subnet riêng tư và liên kết với API Gateway.
+Thiết lập Lambda function và liên kết với API Gateway. Vì sử dụng kiến trúc Serverless thuần túy, Lambda sẽ chạy ở chế độ mặc định trên mạng AWS mà không cần đặt trong VPC, cho phép gọi trực tiếp tới DynamoDB một cách nhanh chóng.
 
 Tạo tệp `lib/api-stack.ts`:
 ```typescript
 import * as cdk from 'aws-cdk-lib';
-import * as ec2 from 'aws-cdk-lib/aws-ec2';
 import * as lambda from 'aws-cdk-lib/aws-lambda';
 import * as apigateway from 'aws-cdk-lib/aws-apigateway';
 import * as cognito from 'aws-cdk-lib/aws-cognito';
@@ -20,7 +19,6 @@ import * as dynamodb from 'aws-cdk-lib/aws-dynamodb';
 import { Construct } from 'constructs';
 
 interface ApiStackProps extends cdk.StackProps {
-  vpc: ec2.IVpc;
   table: dynamodb.Table;
   userPool: cognito.IUserPool;
 }
@@ -29,12 +27,12 @@ export class ApiStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props: ApiStackProps) {
     super(scope, id, props);
 
-    const authorizer = new apigateway.CognitoUserPoolsAuthorizer(this, 'ECommerceApiAuthorizer', {
+    const authorizer = new apigateway.CognitoUserPoolsAuthorizer(this, 'AppApiAuthorizer', {
       cognitoUserPools: [props.userPool],
-      authorizerName: 'ECommerceAuthorizer',
+      authorizerName: 'AppAuthorizer',
     });
 
-    const productLambda = new lambda.Function(this, 'ProductServiceLambda', {
+    const dataLambda = new lambda.Function(this, 'DataServiceLambda', {
       runtime: lambda.Runtime.NODEJS_18_X,
       handler: 'index.handler',
       code: lambda.Code.fromInline(`
@@ -49,7 +47,7 @@ export class ApiStack extends cdk.Stack {
             const data = await docClient.send(new ScanCommand({
               TableName: tableName,
               FilterExpression: "begins_with(PK, :pk)",
-              ExpressionAttributeValues: { ":pk": "PRODUCT#" }
+              ExpressionAttributeValues: { ":pk": "ITEM#" }
             }));
             return {
               statusCode: 200,
@@ -61,29 +59,28 @@ export class ApiStack extends cdk.Stack {
           }
         };
       `),
-      vpc: props.vpc,
-      vpcSubnets: { subnetType: ec2.SubnetType.PRIVATE_WITH_EGRESS },
       environment: {
         TABLE_NAME: props.table.tableName,
       },
     });
 
-    props.table.grantReadWriteData(productLambda);
+    props.table.grantReadWriteData(dataLambda);
 
-    const api = new apigateway.RestApi(this, 'ECommerceRestApi', {
-      restApiName: 'E-Commerce Backend API',
+    const api = new apigateway.RestApi(this, 'AppRestApi', {
+      restApiName: 'Application Backend API',
       defaultCorsPreflightOptions: {
         allowOrigins: apigateway.Cors.ALL_ORIGINS,
         allowMethods: apigateway.Cors.ALL_METHODS,
       },
     });
 
-    const productsResource = api.root.addResource('products');
-    productsResource.addMethod('GET', new apigateway.LambdaIntegration(productLambda));
-    productsResource.addMethod('POST', new apigateway.LambdaIntegration(productLambda), {
+    const itemsResource = api.root.addResource('items');
+    itemsResource.addMethod('GET', new apigateway.LambdaIntegration(dataLambda));
+    itemsResource.addMethod('POST', new apigateway.LambdaIntegration(dataLambda), {
       authorizer: authorizer,
       authorizationType: apigateway.AuthorizationType.COGNITO,
     });
   }
 }
 ```
+---

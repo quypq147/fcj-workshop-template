@@ -19,16 +19,15 @@ Create `test/infra.test.ts`:
 ```typescript
 import * as cdk from 'aws-cdk-lib';
 import { Template } from 'aws-cdk-lib/assertions';
-import * as Network from '../lib/network-stack';
+import * as Storage from '../lib/storage-stack';
 
-test('VPC configuration is correct', () => {
+test('DynamoDB table configuration is correct', () => {
   const app = new cdk.App();
-  const stack = new Network.NetworkStack(app, 'TestStack');
+  const stack = new Storage.StorageStack(app, 'TestStack');
   const template = Template.fromStack(stack);
 
-  template.hasResourceProperties('AWS::EC2::VPC', {
-    EnableDnsSupport: true,
-    EnableDnsHostnames: true,
+  template.hasResourceProperties('AWS::DynamoDB::Table', {
+    BillingMode: 'PAY_PER_REQUEST',
   });
 });
 ```

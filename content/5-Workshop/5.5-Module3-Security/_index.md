@@ -1,11 +1,11 @@
 ---
-title: "Module 4: Security & Roles"
+title: "Module 3: Security & Roles"
 date: 2026-01-01
-weight: 6
+weight: 5
 chapter: false
-pre: " <b> 5.6. </b> "
+pre: " <b> 5.5. </b> "
 ---
-# Module 4: Security & Permissions
+# Module 3: Security & Permissions
 
 Set up Cognito User Pool for login and create fine-grained IAM policies following the principle of Least Privilege.
 
@@ -23,8 +23,8 @@ export class SecurityStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
-    this.userPool = new cognito.UserPool(this, 'ECommerceUserPool', {
-      userPoolName: 'ecommerce-user-pool',
+    this.userPool = new cognito.UserPool(this, 'AppUserPool', {
+      userPoolName: 'app-user-pool',
       selfSignUpEnabled: true,
       signInAliases: { email: true },
       autoVerify: { email: true },
@@ -38,7 +38,7 @@ export class SecurityStack extends cdk.Stack {
       removalPolicy: cdk.RemovalPolicy.DESTROY,
     });
 
-    this.userPoolClient = new cognito.UserPoolClient(this, 'ECommerceUserPoolClient', {
+    this.userPoolClient = new cognito.UserPoolClient(this, 'AppUserPoolClient', {
       userPool: this.userPool,
       generateSecret: false,
     });
