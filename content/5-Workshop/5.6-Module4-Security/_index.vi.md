@@ -1,0 +1,59 @@
+---
+title: "Module 4: Bảo mật & Role"
+date: 2026-01-01
+weight: 6
+chapter: false
+pre: " <b> 5.6. </b> "
+---
+# Module 4: Security & Permissions (Bảo mật & Phân quyền)
+
+Thiết lập Cognito User Pool để quản lý tài khoản khách hàng và cấu hình IAM Roles an toàn.
+
+Tạo tệp `lib/security-stack.ts`:
+```typescript
+import * as cdk from 'aws-cdk-lib';
+import * as cognito from 'aws-cdk-lib/aws-cognito';
+import * as iam from 'aws-cdk-lib/aws-iam';
+import { Construct } from 'constructs';
+
+export class SecurityStack extends cdk.Stack {
+  public readonly userPool: cognito.UserPool;
+  public readonly userPoolClient: cognito.UserPoolClient;
+
+  constructor(scope: Construct, id: string, props?: cdk.StackProps) {
+    super(scope, id, props);
+
+    this.userPool = new cognito.UserPool(this, 'ECommerceUserPool', {
+      userPoolName: 'ecommerce-user-pool',
+      selfSignUpEnabled: true,
+      signInAliases: { email: true },
+      autoVerify: { email: true },
+      passwordPolicy: {
+        minLength: 8,
+        requireLowercase: true,
+        requireUppercase: true,
+        requireDigits: true,
+        requireSymbols: true,
+      },
+      removalPolicy: cdk.RemovalPolicy.DESTROY,
+    });
+
+    this.userPoolClient = new cognito.UserPoolClient(this, 'ECommerceUserPoolClient', {
+      userPool: this.userPool,
+      generateSecret: false,
+    });
+
+    // Custom Role cho hệ thống gửi thông báo (Áp dụng quyền tối thiểu)
+    const notificationRole = new iam.Role(this, 'NotificationPublishRole', {
+      assumedBy: new iam.ServicePrincipal('lambda.amazonaws.com'),
+      description: 'Role for sending notifications with minimal permissions',
+    });
+
+    notificationRole.addToPolicy(new iam.PolicyStatement({
+      actions: ['sns:Publish'],
+      resources: ['*'],
+      effect: iam.Effect.ALLOW,
+    }));
+  }
+}
+```

@@ -1,57 +1,94 @@
 ---
 title: "Week 4 Worklog"
-date: 2024-01-01
-weight: 1
+date: 2026-05-08
+weight: 4
 chapter: false
 pre: " <b> 1.4. </b> "
 ---
-{{% notice warning %}} 
-⚠️ **Note:** The following information is for reference purposes only. Please **do not copy verbatim** for your own report, including this warning.
-{{% /notice %}}
-
-
 ### Week 4 Objectives:
 
-* Connect and get acquainted with members of First Cloud AI Journey.
-* Understand basic AWS services, how to use the console & CLI.
+* Focus on security, service limits, and access control.
+* Get familiar with services that strengthen governance and protection on AWS.
 
 ### Tasks to be carried out this week:
-| Day | Task                                                                                                                                                                                                   | Start Date | Completion Date | Reference Material                        |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------- | --------------- | ----------------------------------------- |
-| 2   | - Get acquainted with FCAJ members <br> - Read and take note of internship unit rules and regulations                                                                                                   | 08/11/2025 | 08/11/2025      |
-| 3   | - Learn about AWS and its types of services <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                              | 08/12/2025 | 08/12/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Create AWS Free Tier account <br> - Learn about AWS Console & AWS CLI <br> - **Practice:** <br>&emsp; + Create AWS account <br>&emsp; + Install & configure AWS CLI <br> &emsp; + How to use AWS CLI | 08/13/2025 | 08/13/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Learn basic EC2: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - SSH connection methods to EC2 <br> - Learn about Elastic IP   <br>                            | 08/14/2025 | 08/15/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Practice:** <br>&emsp; + Launch an EC2 instance <br>&emsp; + Connect via SSH <br>&emsp; + Attach an EBS volume                                                                                     | 08/15/2025 | 08/15/2025      | <https://cloudjourney.awsstudygroup.com/> |
+| Day | Task | Start Date | Completion Date | Reference Material | Status |
+| --- | --- | --- | --- | --- | --- |
+| 1 | AWS: Quotas & Environment | 05/08/2026 | 05/08/2026 | Reviewed service quotas and working environment setup | Completed |
+| 2 | AWS: EBS Backup Automation | 05/09/2026 | 05/09/2026 | Automated snapshots and backup patterns | Completed |
+| 3 | AWS: SSO & Permissions | 05/10/2026 | 05/10/2026 | Explored centralized identity and permissions | Completed |
+| 4 | AWS: IAM Policies & Sec Hub | 05/11/2026 | 05/11/2026 | Practiced IAM policy design and compliance checks | Completed |
+| 5 | AWS: S3 Endpoints & WAF | 05/12/2026 | 05/12/2026 | Implemented private S3 access and app protection | Completed |
+| 6 | AWS: Macie & KMS | 05/13/2026 | 05/13/2026 | Applied encryption and sensitive data discovery | Completed |
+| 7 | AWS: Secrets & Firewall Mgr | 05/14/2026 | 05/14/2026 | Managed secrets and security policies at scale | Completed |
 
 
-### Week 4 Achievements:
+### Daily Details
 
-* Understood what AWS is and mastered the basic service groups: 
-  * Compute
-  * Storage
-  * Networking 
-  * Database
-  * ...
+#### Day 1 - AWS: Quotas & Environment
 
-* Successfully created and configured an AWS Free Tier account.
+* Checked service quotas and prepared the working environment before labs.
+#### Day 2 - AWS: EBS Backup Automation
 
-* Became familiar with the AWS Management Console and learned how to find, access, and use services via the web interface.
+* Automated snapshots and learned how to plan backups for EBS.
+#### Day 3 - AWS: SSO & Permissions
 
-* Installed and configured AWS CLI on the computer, including:
-  * Access Key
-  * Secret Key
-  * Default Region
-  * ...
+* Learned centralized identity and how to assign permissions in enterprise setups.
+#### Day 4 - AWS: IAM Policies & Sec Hub
 
-* Used AWS CLI to perform basic operations such as:
+* Designed IAM policies and used Security Hub to review security posture.
+#### Day 5 - AWS: S3 Endpoints & WAF
 
-  * Check account & configuration information
-  * Retrieve the list of regions
-  * View EC2 service
-  * Create and manage key pairs
-  * Check information about running services
-  * ...
+* Set up private S3 access and added application protection with WAF.
+#### Day 6 - AWS: Macie & KMS
 
-* Acquired the ability to connect between the web interface and CLI to manage AWS resources in parallel.
-* ...
+* Applied encryption with KMS and discovered sensitive data with Macie.
+#### Day 7 - AWS: Secrets & Firewall Mgr
+
+* Managed secrets and coordinated security policies across multiple accounts.
+### Week 4 Outcomes:
+
+* Understood how to design layered security controls on AWS.
+* Applied IAM, KMS, Macie, WAF, and Security Hub in practical scenarios.
+* Built a foundation to handle sensitive workloads and strict access requirements.
+
+<!-- BEGIN EXCEL PROGRESS -->
+
+**Cập nhật từ Excel**
+
+- - Learn Infrastructure as Code (IaC)  
+    
+  - Practice:  
+    
+  + Infrastructure as Code with AWS CloudFormation:Done  
+    
+  + Cloud Development Kit (AWS CDK) Essentials:Done  
+    
+  + AWS CDK Advanced:Done  
+    
+  + Infrastructure as Code Workshop Series:Done (08/05/2026 → 10/05/2026)  
+Reference: https://cloudjourney.awsstudygroup.com/3-optimize/
+- - Learn Cost & Network Optimization  
+    
+  - Practice:  
+    
+  + Right-Sizing with EC2 Resource Optimization:Done  
+    
+  + Network Monitoring with VPC Flow Logs:Done  
+    
+  + Billing Console Delegation & Managing Quotas:Done (11/05/2026 → 12/05/2026)  
+Reference: https://cloudjourney.awsstudygroup.com/3-optimize/
+- - Learn Cost Management & EBS Backups  
+    
+  - Practice:  
+    
+  + Cost and Usage Management:Done  
+    
+  + Snapshot Automation with Amazon EBS Lifecycle:Done  
+    
+  + Anomaly Detection for EBS Backups:Done  
+    
+  + Development Environment with Toolkit for VS Code:Done (13/05/2026 → 14/05/2026)  
+Reference: https://cloudjourney.awsstudygroup.com/3-optimize/
+
+<!-- END EXCEL PROGRESS -->
+

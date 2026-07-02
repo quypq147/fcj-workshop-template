@@ -1,59 +1,58 @@
 ---
-title: "Worklog Tuần 5"
-date: 2024-01-01
-weight: 1
+title: "Worklog Tuan 5"
+date: 2026-05-15
+weight: 5
 chapter: false
 pre: " <b> 1.5. </b> "
 ---
-{{% notice warning %}}
-⚠️ **Lưu ý:** Các thông tin dưới đây chỉ nhằm mục đích tham khảo, vui lòng **không sao chép nguyên văn** cho bài báo cáo của bạn kể cả warning này.
-{{% /notice %}}
+### Muc tieu tuan 5:
 
+* Dao sau bao mat, ket noi mang va thiet ke tinh san sang cao.
+* Thuc hanh cac mo hinh do tin cay cho workload quan trong theo phong cach doanh nghiep.
 
-### Mục tiêu tuần 5:
+### Cac cong viec can trien khai trong tuan nay:
+| Ngay | Nhiem vu | Ngay bat dau | Ngay hoan thanh | Tai lieu tham khao | Trang thai |
+| --- | --- | --- | --- | --- | --- |
+| 1 | AWS: Security & Patching | 15/05/2026 | 15/05/2026 | Thuc hanh phat hien de doa va quy trinh patching | Hoan thanh |
+| 2 | AWS: Backup & VPC Peering | 16/05/2026 | 16/05/2026 | Tim hieu quan ly backup va VPC peering | Hoan thanh |
+| 3 | AWS: Transit GW & Messaging | 17/05/2026 | 17/05/2026 | Hoc dinh tuyen tap trung va he thong nhan tin | Hoan thanh |
+| 4 | AWS: EBS Multi-Attach | 18/05/2026 | 18/05/2026 | Kiem thu cac mo hinh luu tru chia se | Hoan thanh |
+| 5 | AWS: Windows Clustering | 19/05/2026 | 19/05/2026 | Thuc hanh kha nang failover clustering | Hoan thanh |
+| 6 | AWS: SQL Server HA 2019 | 20/05/2026 | 20/05/2026 | Lam viec voi tinh san sang cao cua SQL Server | Hoan thanh |
+| 7 | AWS: SQL Server HA 2022 | 21/05/2026 | 21/05/2026 | So sanh va cai tien cau hinh HA tren phien ban moi | Hoan thanh |
 
-* Kết nối, làm quen với các thành viên trong First Cloud AI Journey.
-* Hiểu dịch vụ AWS cơ bản, cách dùng console & CLI.
+### Chi tiet tung ngay
 
-### Các công việc cần triển khai trong tuần này:
-| Thứ | Công việc                                                                                                                                                                                   | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu                            |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | --------------- | ----------------------------------------- |
-| 2   | - Làm quen với các thành viên FCAJ <br> - Đọc và lưu ý các nội quy, quy định tại đơn vị thực tập                                                                                             | 11/08/2025   | 11/08/2025      |
-| 3   | - Tìm hiểu AWS và các loại dịch vụ <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                            | 12/08/2025   | 12/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Tạo AWS Free Tier account <br> - Tìm hiểu AWS Console & AWS CLI <br> - **Thực hành:** <br>&emsp; + Tạo AWS account <br>&emsp; + Cài AWS CLI & cấu hình <br> &emsp; + Cách sử dụng AWS CLI | 13/08/2025   | 13/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Tìm hiểu EC2 cơ bản: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - Các cách remote SSH vào EC2 <br> - Tìm hiểu Elastic IP   <br>                  | 14/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Thực hành:** <br>&emsp; + Tạo EC2 instance <br>&emsp; + Kết nối SSH <br>&emsp; + Gắn EBS volume                                                                                         | 15/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
+#### Ngay 1 - AWS: Security & Patching
 
+* Ra soat giam sat bao mat va quy trinh patching he thong.
 
-### Kết quả đạt được tuần 5:
+#### Ngay 2 - AWS: Backup & VPC Peering
 
-* Hiểu AWS là gì và nắm được các nhóm dịch vụ cơ bản: 
-  * Compute
-  * Storage
-  * Networking 
-  * Database
-  * ...
+* Ket noi ke hoach backup voi thiet ke mang qua cac tinh huong VPC peering.
 
-* Đã tạo và cấu hình AWS Free Tier account thành công.
+#### Ngay 3 - AWS: Transit GW & Messaging
 
-* Làm quen với AWS Management Console và biết cách tìm, truy cập, sử dụng dịch vụ từ giao diện web.
+* Hoc dinh tuyen tap trung voi Transit Gateway va cac luong nhan tin co ban.
 
-* Cài đặt và cấu hình AWS CLI trên máy tính bao gồm:
-  * Access Key
-  * Secret Key
-  * Region mặc định
-  * ...
+#### Ngay 4 - AWS: EBS Multi-Attach
 
-* Sử dụng AWS CLI để thực hiện các thao tác cơ bản như:
+* Kiem thu hanh vi luu tru chia se va gioi han cua EBS Multi-Attach.
 
-  * Kiểm tra thông tin tài khoản & cấu hình
-  * Lấy danh sách region
-  * Xem dịch vụ EC2
-  * Tạo và quản lý key pair
-  * Kiểm tra thông tin dịch vụ đang chạy
-  * ...
+#### Ngay 5 - AWS: Windows Clustering
 
-* Có khả năng kết nối giữa giao diện web và CLI để quản lý tài nguyên AWS song song.
-* ...
+* Ra soat y tuong failover clustering cho workload Windows Server.
 
+#### Ngay 6 - AWS: SQL Server HA 2019
 
+* Thuc hanh cac khai niem san sang cao khi trien khai SQL Server tren AWS.
+
+#### Ngay 7 - AWS: SQL Server HA 2022
+
+* So sanh cac cai tien ve HA tren phien ban SQL Server moi.
+
+### Ket qua dat duoc tuan 5:
+
+* Cuong co hieu biet ve kien truc do tin cay cho workload doanh nghiep.
+* Ket noi van hanh bao mat voi backup, networking va thiet ke HA.
+* San sang hon cho cac quyet dinh trien khai theo tieu chuan production.

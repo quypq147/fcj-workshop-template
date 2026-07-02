@@ -1,125 +1,53 @@
----
-title: "Event 1"
-date: 2024-01-01
-weight: 1
-chapter: false
-pre: " <b> 4.1. </b> "
----
++++
+title = "FCAJ Meet Up 6/6/2026"
+date = 2026-06-06
+weight = 1
+chapter = false
+pre = " <b> 4.1. </b> "
++++
 
-{{% notice warning %}}
-⚠️ **Lưu ý:** Các thông tin dưới đây chỉ nhằm mục đích tham khảo, vui lòng **không sao chép nguyên văn** cho bài báo cáo của bạn kể cả warning này.
-{{% /notice %}}
+## 1. Thông tin chung
 
-# Bài thu hoạch “GenAI-powered App-DB Modernization workshop”
+&emsp;**Tên sự kiện:** Using AI in new Era
 
-### Mục Đích Của Sự Kiện
+&emsp;**Ngày:** 06/06/2026
 
-- Chia sẻ best practices trong thiết kế ứng dụng hiện đại
-- Giới thiệu phương pháp DDD và event-driven architecture
-- Hướng dẫn lựa chọn compute services phù hợp
-- Giới thiệu công cụ AI hỗ trợ development lifecycle
+&emsp;**Địa điểm:** Tầng 26, Bitexco Tower, 02 Hai Trieu Street, Phường Bến Nghé, Quận 1, TP. Hồ Chí Minh
 
-### Danh Sách Diễn Giả
+&emsp;**Vai trò:** Người tham dự
 
-- **Jignesh Shah** - Director, Open Source Databases
-- **Erica Liu** - Sr. GTM Specialist, AppMod
-- **Fabrianne Effendi** - Assc. Specialist SA, Serverless Amazon Web Services
+&emsp;**Hình thức:** Buổi meetup kỹ thuật gồm phần trình bày, demo và hỏi đáp
 
-### Nội Dung Nổi Bật
+## 2. Nội dung chính của sự kiện
 
-#### Đưa ra các ảnh hưởng tiêu cực của kiến trúc ứng dụng cũ
+Sự kiện tập trung vào cách ứng dụng AI, cloud và các công nghệ hạ tầng hiện đại trong những hệ thống thực tế. Mỗi bài nói đều kết hợp giữa lý thuyết và triển khai, giúp tôi nhìn rõ hơn cách các công nghệ này được áp dụng trong môi trường làm việc và nghiên cứu.
 
-- Thời gian release sản phẩm lâu → Mất doanh thu/bỏ lỡ cơ hội
-- Hoạt động kém hiệu quả → Mất năng suất, tốn kém chi phí
-- Không tuân thủ các quy định về bảo mật → Mất an ninh, uy tín
+1. **Multiplayer to AWS Cloud** - Diễn giả: Quoc Bao từ Swinburne University
 
-#### Chuyển đổi sang kiến trúc ứng dụng mới - Microservice Architecture
+	Bài nói trình bày cách xây dựng và triển khai một hệ thống multiplayer trên AWS theo hướng serverless. Nội dung bao gồm kiến trúc tổng thể, các dịch vụ AWS được sử dụng, thiết kế Route Key, cấu trúc DynamoDB Schema, logic Lambda, vòng lặp client của Godot, demo trực tiếp và những thách thức khi triển khai hệ thống thời gian thực.
 
-Chuyển đổi thành hệ thống modular – từng chức năng là một **dịch vụ độc lập** giao tiếp với nhau qua **sự kiện** với 3 trụ cột cốt lõi:
+2. **Docker - A Containerization Technology** - Diễn giả: Bao từ Swinburne University
 
-- **Queue Management**: Xử lý tác vụ bất đồng bộ
-- **Caching Strategy:** Tối ưu performance
-- **Message Handling:** Giao tiếp linh hoạt giữa services
+	Phần này giới thiệu Docker như một công nghệ containerization quan trọng, đồng thời so sánh giữa virtualization và containerization. Diễn giả cũng minh họa cách Docker giúp đóng gói ứng dụng, quản lý phụ thuộc và giữ tính nhất quán giữa các môi trường phát triển, kiểm thử và triển khai.
 
-#### Domain-Driven Design (DDD)
+3. **GraphRAG - Build GraphRAG Applications** - Diễn giả từ Swinburne University
 
-- **Phương pháp 4 bước**: Xác định domain events → sắp xếp timeline → identify actors → xác định bounded contexts
-- **Case study bookstore**: Minh họa cách áp dụng DDD thực tế
-- **Context mapping**: 7 patterns tích hợp bounded contexts
+	Bài trình bày giới thiệu về RAG trước khi đi sâu vào GraphRAG như một hướng tiếp cận mạnh hơn cho các ứng dụng AI dựa trên tri thức. Nội dung nhấn mạnh cách kết hợp GraphRAG với Amazon Bedrock và Amazon Neptune để xây dựng các giải pháp AI có khả năng truy xuất ngữ cảnh tốt hơn, dễ kiểm tra hơn và phù hợp với bài toán doanh nghiệp.
 
-#### Event-Driven Architecture
+4. **WAF + ML for Cyber Attack Detection** - Diễn giả: Dai
 
-- **3 patterns tích hợp**: Publish/Subscribe, Point-to-point, Streaming
-- **Lợi ích**: Loose coupling, scalability, resilience
-- **So sánh sync vs async**: Hiểu rõ trade-offs (sự đánh đổi)
+	Bài nói này đề cập đến Web Application Firewall và vai trò của Network Intrusion Detection System trong an ninh mạng. Ngoài ra, phần trình bày còn cho thấy cách xây dựng mô hình Machine Learning để hỗ trợ phát hiện tấn công dựa trên các mẫu hành vi bất thường.
 
-#### Compute Evolution
+5. **From IT Helpdesk to Senior Sysadmin**
 
-- **Shared Responsibility Model**: Từ EC2 → ECS → Fargate → Lambda
-- **Serverless benefits**: No server management, auto-scaling, pay-for-value
-- **Functions vs Containers**: Criteria lựa chọn phù hợp
+	Bài cuối cùng chia sẻ hành trình nghề nghiệp từ vị trí hỗ trợ kỹ thuật đến Senior Sysadmin. Nội dung bao gồm kinh nghiệm làm việc thực tế, những bước đầu tiếp cận cloud, các vòng phỏng vấn nhóm và những bài học quan trọng cho lộ trình phát triển nghề nghiệp lâu dài.
 
-#### Amazon Q Developer
+## 3. Bài học rút ra và Đóng góp cá nhân
 
-- **SDLC automation**: Từ planning đến maintenance
-- **Code transformation**: Java upgrade, .NET modernization
-- **AWS Transform agents**: VMware, Mainframe, .NET migration
+Điều tôi rút ra nhiều nhất từ sự kiện là cách các công nghệ khác nhau có thể kết hợp với nhau để tạo thành một hệ thống thực tế và có thể mở rộng. Phần GraphRAG đặc biệt hữu ích vì đã giúp tôi hiểu rõ hơn mối liên hệ giữa AI, đồ thị tri thức, Amazon Bedrock và Amazon Neptune. Từ đó, tôi nhận ra GraphRAG không chỉ cải thiện chất lượng câu trả lời mà còn giúp tăng tính tin cậy, khả năng truy vết và khả năng bảo trì của các ứng dụng AI.
 
-### Những Gì Học Được
+Bên cạnh đó, phần trình bày về multiplayer backend trên AWS giúp tôi hiểu rõ hơn cách thiết kế hệ thống serverless cho bài toán thời gian thực. Những nội dung như Route Key, DynamoDB Schema, Lambda logic và Godot client loop đã cho tôi góc nhìn cụ thể về cách xây dựng backend có khả năng mở rộng, đồng thời cho thấy các đánh đổi về độ trễ, quản lý trạng thái và tích hợp dịch vụ.
 
-#### Tư Duy Thiết Kế
+Trong phần hỏi đáp, tôi chủ động đặt câu hỏi và trao đổi về những thách thức khi triển khai, đặc biệt là các vấn đề liên quan đến quy trình GraphRAG, tổ chức dữ liệu trong Neptune và độ ổn định của mô hình multiplayer serverless. Việc tham gia thảo luận trực tiếp giúp tôi liên hệ nội dung bài nói với các vấn đề kỹ thuật thực tế như hiệu năng, chất lượng truy xuất và độ phức tạp kiến trúc.
 
-- **Business-first approach**: Luôn bắt đầu từ business domain, không phải technology
-- **Ubiquitous language**: Importance của common vocabulary giữa business và tech teams
-- **Bounded contexts**: Cách identify và manage complexity trong large systems
-
-#### Kiến Trúc Kỹ Thuật
-
-- **Event storming technique**: Phương pháp thực tế để mô hình hóa quy trình kinh doanh
-- Sử dụng **Event-driven communication** thay vì synchronous calls
-- **Integration patterns**: Hiểu khi nào dùng sync, async, pub/sub, streaming
-- **Compute spectrum**: Criteria chọn từ VM → containers → serverless
-
-#### Chiến Lược Hiện Đại Hóa
-
-- **Phased approach**: Không rush, phải có roadmap rõ ràng
-- **7Rs framework**: Nhiều con đường khác nhau tùy thuộc vào đặc điểm của mỗi ứng dụng
-- **ROI measurement**: Cost reduction + business agility
-
-### Ứng Dụng Vào Công Việc
-
-- **Áp dụng DDD** cho project hiện tại: Event storming sessions với business team
-- **Refactor microservices**: Sử dụng bounded contexts để identify service boundaries
-- **Implement event-driven patterns**: Thay thế một số sync calls bằng async messaging
-- **Serverless adoption**: Pilot AWS Lambda cho một số use cases phù hợp
-- **Try Amazon Q Developer**: Integrate vào development workflow để boost productivity
-
-### Trải nghiệm trong event
-
-Tham gia workshop **“GenAI-powered App-DB Modernization”** là một trải nghiệm rất bổ ích, giúp tôi có cái nhìn toàn diện về cách hiện đại hóa ứng dụng và cơ sở dữ liệu bằng các phương pháp và công cụ hiện đại. Một số trải nghiệm nổi bật:
-
-#### Học hỏi từ các diễn giả có chuyên môn cao
-- Các diễn giả đến từ AWS và các tổ chức công nghệ lớn đã chia sẻ **best practices** trong thiết kế ứng dụng hiện đại.
-- Qua các case study thực tế, tôi hiểu rõ hơn cách áp dụng **Domain-Driven Design (DDD)** và **Event-Driven Architecture** vào các project lớn.
-
-#### Trải nghiệm kỹ thuật thực tế
-- Tham gia các phiên trình bày về **event storming** giúp tôi hình dung cách **mô hình hóa quy trình kinh doanh** thành các domain events.
-- Học cách **phân tách microservices** và xác định **bounded contexts** để quản lý sự phức tạp của hệ thống lớn.
-- Hiểu rõ trade-offs giữa **synchronous và asynchronous communication** cũng như các pattern tích hợp như **pub/sub, point-to-point, streaming**.
-
-#### Ứng dụng công cụ hiện đại
-- Trực tiếp tìm hiểu về **Amazon Q Developer**, công cụ AI hỗ trợ SDLC từ lập kế hoạch đến maintenance.
-- Học cách **tự động hóa code transformation** và pilot serverless với **AWS Lambda**, từ đó nâng cao năng suất phát triển.
-
-#### Kết nối và trao đổi
-- Workshop tạo cơ hội trao đổi trực tiếp với các chuyên gia, đồng nghiệp và team business, giúp **nâng cao ngôn ngữ chung (ubiquitous language)** giữa business và tech.
-- Qua các ví dụ thực tế, tôi nhận ra tầm quan trọng của **business-first approach**, luôn bắt đầu từ nhu cầu kinh doanh thay vì chỉ tập trung vào công nghệ.
-
-#### Bài học rút ra
-- Việc áp dụng DDD và event-driven patterns giúp giảm **coupling**, tăng **scalability** và **resilience** cho hệ thống.
-- Chiến lược hiện đại hóa cần **phased approach** và đo lường **ROI**, không nên vội vàng chuyển đổi toàn bộ hệ thống.
-- Các công cụ AI như Amazon Q Developer có thể **boost productivity** nếu được tích hợp vào workflow phát triển hiện tại.
-
-#### Một số hình ảnh khi tham gia sự kiện
-* Thêm các hình ảnh của các bạn tại đây
-> Tổng thể, sự kiện không chỉ cung cấp kiến thức kỹ thuật mà còn giúp tôi thay đổi cách tư duy về thiết kế ứng dụng, hiện đại hóa hệ thống và phối hợp hiệu quả hơn giữa các team.
+Về mặt cá nhân, sự kiện này giúp tôi có thêm động lực học sâu hơn về cloud architecture, thiết kế ứng dụng AI và phát triển hệ thống có tính bảo mật. Đây cũng là một trải nghiệm quan trọng để tôi định hướng tốt hơn cho các nhiệm vụ thực tập sau này, đặc biệt khi làm việc với AWS services, backend workflows và các giải pháp hỗ trợ bởi AI.

@@ -1,126 +1,54 @@
----
-title: "Event 1"
-date: 2024-01-01
-weight: 1
-chapter: false
-pre: " <b> 4.1. </b> "
----
++++
+title = "FCAJ Meet Up 6/6/2026"
+date = 2026-06-06
+weight = 1
+chapter = false
+pre = " <b> 4.1. </b> "
++++
 
-{{% notice warning %}}
-⚠️ **Note:** The information below is for reference purposes only. Please **do not copy it verbatim** into your report, including this warning.
-{{% /notice %}}
+## 1. General Information
 
-# Summary Report: “GenAI-powered App-DB Modernization workshop”
+&emsp;**Event Name:** Using AI in new Era
 
-### Event Objectives
+&emsp;**Date:** 06/06/2026
 
-- Share best practices in modern application design
-- Introduce Domain-Driven Design (DDD) and event-driven architecture
-- Provide guidance on selecting the right compute services
-- Present AI tools to support the development lifecycle
+&emsp;**Location:** 26th Floor, Bitexco Tower, 02 Hai Trieu Street, Ben Nghe Ward, District 1, Ho Chi Minh City
 
-### Speakers
+&emsp;**Role:** Attendee
 
-- **Jignesh Shah** – Director, Open Source Databases
-- **Erica Liu** – Sr. GTM Specialist, AppMod
-- **Fabrianne Effendi** – Assc. Specialist SA, Serverless Amazon Web Services
+&emsp;**Format:** Technical meetup with talks, demonstrations, and Q&A
 
-### Key Highlights
+## 2. Main Content of the Event
 
-#### Identifying the drawbacks of legacy application architecture
+The event focused on practical ways AI and modern cloud technologies are being applied in software systems, infrastructure, and security. Each talk connected theory with implementation, which made the sessions relevant to both current study and future internship work.
 
-- Long product release cycles → Lost revenue/missed opportunities  
-- Inefficient operations → Reduced productivity, higher costs  
-- Non-compliance with security regulations → Security breaches, loss of reputation  
+1. **Multiplayer to AWS Cloud** - Speaker: Quoc Bao from Swinburne University
 
-#### Transitioning to modern application architecture – Microservices
+	This talk explained how a multiplayer system can be designed and deployed on AWS using a serverless approach. The speaker discussed the overall architecture, AWS services involved, Route Key design, DynamoDB schema planning, Lambda logic, and the Godot client loop. A live demo showed how the components interact in practice and highlighted the engineering challenges of keeping real-time gameplay responsive and reliable.
 
-Migrating to a modular system — each function is an **independent service** communicating via **events**, built on three core pillars:
+2. **Docker - A Containerization Technology** - Speaker: Bao from Swinburne University
 
-- **Queue Management**: Handle asynchronous tasks  
-- **Caching Strategy**: Optimize performance  
-- **Message Handling**: Flexible inter-service communication  
+	This session introduced Docker as a practical containerization solution and compared virtualization with containerization. The speaker demonstrated how Docker simplifies application packaging, dependency management, and environment consistency across development and deployment stages.
 
-#### Domain-Driven Design (DDD)
+3. **GraphRAG - Build GraphRAG Applications** - Speaker from Swinburne University
 
-- **Four-step method**: Identify domain events → arrange timeline → identify actors → define bounded contexts  
-- **Bookstore case study**: Demonstrates real-world DDD application  
-- **Context mapping**: 7 patterns for integrating bounded contexts  
+	The presentation introduced Retrieval-Augmented Generation before moving into GraphRAG as a more structured approach for knowledge-intensive AI applications. The speaker showed how graph-based retrieval can be combined with Amazon Bedrock and Amazon Neptune to build solutions that are more context-aware, traceable, and scalable for enterprise use cases.
 
-#### Event-Driven Architecture
+4. **WAF + ML for Cyber Attack Detection** - Speaker: Dai
 
-- **3 integration patterns**: Publish/Subscribe, Point-to-point, Streaming  
-- **Benefits**: Loose coupling, scalability, resilience  
-- **Sync vs async comparison**: Understanding the trade-offs  
+	This talk covered Web Application Firewall concepts and the role of Network Intrusion Detection Systems in defensive cybersecurity. It also explored how machine learning models can support attack detection by identifying patterns and anomalies that are difficult to catch with static rules alone.
 
-#### Compute Evolution
+5. **From IT Helpdesk to Senior Sysadmin**
 
-- **Shared Responsibility Model**: EC2 → ECS → Fargate → Lambda  
-- **Serverless benefits**: No server management, auto-scaling, pay-for-value  
-- **Functions vs Containers**: Criteria for appropriate choice  
+	This final talk shared a career journey from entry-level support roles to senior system administration. It covered real working experiences, first cloud adoption steps, group interview lessons, and practical advice for building a long-term career in infrastructure and operations.
 
-#### Amazon Q Developer
+## 3. Key Takeaways & Personal Contribution
 
-- **SDLC automation**: From planning to maintenance  
-- **Code transformation**: Java upgrade, .NET modernization  
-- **AWS Transform agents**: VMware, Mainframe, .NET migration  
+The most valuable part of the event for me was seeing how different technologies can work together in realistic system designs. The GraphRAG talk was especially useful because it connected AI with knowledge graphs, Amazon Bedrock, and Neptune in a way that clarified how enterprise AI solutions can be organized around structured retrieval instead of plain text search only. I learned that GraphRAG is not just about improving answers; it is also about improving trust, grounding, and maintainability in AI-driven applications.
 
-### Key Takeaways
+I was also strongly interested in the multiplayer backend discussion because it showed how AWS serverless services can be combined to support real-time application logic. The explanation of Route Keys, DynamoDB schema design, Lambda functions, and the Godot client loop helped me understand how event-driven cloud architecture can be applied to a game-like workload. This directly reinforced my understanding of scalable backend design and the trade-offs involved in latency, state management, and service integration.
 
-#### Design Mindset
+During the Q&A session, I actively asked and discussed questions about implementation challenges, especially around GraphRAG pipeline design, data organization in Neptune, and the reliability limits of serverless multiplayer systems. That exchange helped me connect the presentations to practical engineering concerns such as performance, retrieval quality, and architectural complexity.
 
-- **Business-first approach**: Always start from the business domain, not the technology  
-- **Ubiquitous language**: Importance of a shared vocabulary between business and tech teams  
-- **Bounded contexts**: Identifying and managing complexity in large systems  
+From a personal perspective, the event strengthened my motivation to continue learning cloud architecture, AI application design, and security-aware system development. It also gave me a clearer direction for future internship tasks, especially when working with AWS services, backend workflows, and AI-assisted solutions.
 
-#### Technical Architecture
-
-- **Event storming technique**: Practical method for modeling business processes  
-- Use **event-driven communication** instead of synchronous calls  
-- **Integration patterns**: When to use sync, async, pub/sub, streaming  
-- **Compute spectrum**: Criteria for choosing between VM, containers, and serverless  
-
-#### Modernization Strategy
-
-- **Phased approach**: No rushing — follow a clear roadmap  
-- **7Rs framework**: Multiple modernization paths depending on the application  
-- **ROI measurement**: Cost reduction + business agility  
-
-### Applying to Work
-
-- **Apply DDD** to current projects: Event storming sessions with business teams  
-- **Refactor microservices**: Use bounded contexts to define service boundaries  
-- **Implement event-driven patterns**: Replace some sync calls with async messaging  
-- **Adopt serverless**: Pilot AWS Lambda for suitable use cases  
-- **Try Amazon Q Developer**: Integrate into the dev workflow to boost productivity  
-
-### Event Experience
-
-Attending the **“GenAI-powered App-DB Modernization”** workshop was extremely valuable, giving me a comprehensive view of modernizing applications and databases using advanced methods and tools. Key experiences included:
-
-#### Learning from highly skilled speakers
-- Experts from AWS and major tech organizations shared **best practices** in modern application design.  
-- Through real-world case studies, I gained a deeper understanding of applying **DDD** and **Event-Driven Architecture** to large projects.  
-
-#### Hands-on technical exposure
-- Participating in **event storming** sessions helped me visualize how to **model business processes** into domain events.  
-- Learned how to **split microservices** and define **bounded contexts** to manage large-system complexity.  
-- Understood trade-offs between **synchronous and asynchronous communication** and integration patterns like **pub/sub, point-to-point, streaming**.  
-
-#### Leveraging modern tools
-- Explored **Amazon Q Developer**, an AI tool for SDLC support from planning to maintenance.  
-- Learned to **automate code transformation** and pilot serverless with **AWS Lambda** to improve productivity.  
-
-#### Networking and discussions
-- The workshop offered opportunities to exchange ideas with experts, peers, and business teams, enhancing the **ubiquitous language** between business and tech.  
-- Real-world examples reinforced the importance of the **business-first approach** rather than focusing solely on technology.  
-
-#### Lessons learned
-- Applying DDD and event-driven patterns reduces **coupling** while improving **scalability** and **resilience**.  
-- Modernization requires a **phased approach** with **ROI measurement**; rushing the process can be risky.  
-- AI tools like Amazon Q Developer can significantly **boost productivity** when integrated into the current workflow.  
-
-#### Some event photos
-*Add your event photos here*  
-
-> Overall, the event not only provided technical knowledge but also helped me reshape my thinking about application design, system modernization, and cross-team collaboration.

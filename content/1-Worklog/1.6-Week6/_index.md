@@ -1,57 +1,53 @@
 ---
 title: "Week 6 Worklog"
-date: 2024-01-01
-weight: 1
+date: 2026-05-22
+weight: 6
 chapter: false
 pre: " <b> 1.6. </b> "
 ---
-{{% notice warning %}} 
-⚠️ **Note:** The following information is for reference purposes only. Please **do not copy verbatim** for your own report, including this warning.
-{{% /notice %}}
-
-
 ### Week 6 Objectives:
 
-* Connect and get acquainted with members of First Cloud AI Journey.
-* Understand basic AWS services, how to use the console & CLI.
+* Practice containerization, orchestration, and CI/CD for container apps.
+* Learn more about storage and cost optimization.
 
 ### Tasks to be carried out this week:
-| Day | Task                                                                                                                                                                                                   | Start Date | Completion Date | Reference Material                        |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------- | --------------- | ----------------------------------------- |
-| 2   | - Get acquainted with FCAJ members <br> - Read and take note of internship unit rules and regulations                                                                                                   | 08/11/2025 | 08/11/2025      |
-| 3   | - Learn about AWS and its types of services <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                              | 08/12/2025 | 08/12/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Create AWS Free Tier account <br> - Learn about AWS Console & AWS CLI <br> - **Practice:** <br>&emsp; + Create AWS account <br>&emsp; + Install & configure AWS CLI <br> &emsp; + How to use AWS CLI | 08/13/2025 | 08/13/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Learn basic EC2: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - SSH connection methods to EC2 <br> - Learn about Elastic IP   <br>                            | 08/14/2025 | 08/15/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Practice:** <br>&emsp; + Launch an EC2 instance <br>&emsp; + Connect via SSH <br>&emsp; + Attach an EBS volume                                                                                     | 08/15/2025 | 08/15/2025      | <https://cloudjourney.awsstudygroup.com/> |
+| Day | Task | Start Date | Completion Date | Reference Material | Status |
+| --- | --- | --- | --- | --- | --- |
+| 1 | AWS: Docker & ECS | 05/22/2026 | 05/22/2026 | Containerized applications and deployed on ECS | Completed |
+| 2 | AWS: ECS IaC & CodePipeline | 05/23/2026 | 05/23/2026 | Automated ECS delivery with CDK and pipeline | Completed |
+| 3 | AWS: Deployments & DevOps | 05/24/2026 | 05/24/2026 | Practiced release automation patterns | Completed |
+| 4 | AWS: Storage Gateway & FSx | 05/25/2026 | 05/25/2026 | Explored hybrid and file storage scenarios | Completed |
+| 5 | AWS: DynamoDB & Step Functions | 05/26/2026 | 05/26/2026 | Integrated NoSQL and workflow orchestration | Completed |
+| 6 | AWS: Storage Performance | 05/27/2026 | 05/27/2026 | Optimized storage performance behavior | Completed |
+| 7 | AWS: Cost Visualization | 05/28/2026 | 05/28/2026 | Analyzed and visualized cloud costs | Completed |
 
 
-### Week 6 Achievements:
+### Daily Details
 
-* Understood what AWS is and mastered the basic service groups: 
-  * Compute
-  * Storage
-  * Networking 
-  * Database
-  * ...
+#### Day 1 - AWS: Docker & ECS
 
-* Successfully created and configured an AWS Free Tier account.
+* Containerized an application and ran it on Amazon ECS.
+#### Day 2 - AWS: ECS IaC & CodePipeline
 
-* Became familiar with the AWS Management Console and learned how to find, access, and use services via the web interface.
+* Automated ECS deployment using CDK and CodePipeline.
+#### Day 3 - AWS: Deployments & DevOps
 
-* Installed and configured AWS CLI on the computer, including:
-  * Access Key
-  * Secret Key
-  * Default Region
-  * ...
+* Practiced automated release workflows and DevOps operations.
+#### Day 4 - AWS: Storage Gateway & FSx
 
-* Used AWS CLI to perform basic operations such as:
+* Explored hybrid storage and file storage for Windows environments.
+#### Day 5 - AWS: DynamoDB & Step Functions
 
-  * Check account & configuration information
-  * Retrieve the list of regions
-  * View EC2 service
-  * Create and manage key pairs
-  * Check information about running services
-  * ...
+* Combined NoSQL storage with workflow orchestration.
+#### Day 6 - AWS: Storage Performance
 
-* Acquired the ability to connect between the web interface and CLI to manage AWS resources in parallel.
-* ...
+* Analyzed storage performance and how choices affect the system.
+#### Day 7 - AWS: Cost Visualization
+
+* Visualized cloud costs to support budget optimization.
+### Week 6 Outcomes:
+
+* Learned how to deploy and operate container applications on AWS.
+* Understood the link between CI/CD, storage, and cost optimization.
+* Gained perspective on designing systems that are flexible and cost-efficient.
+

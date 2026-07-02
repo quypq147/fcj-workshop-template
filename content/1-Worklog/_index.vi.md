@@ -1,40 +1,35 @@
 ---
 title: "Nhật ký công việc"
-date: 2024-01-01
+date: 2026-01-01
 weight: 1
 chapter: false
 pre: " <b> 1. </b> "
 ---
 
-{{% notice warning %}}
-⚠️ **Lưu ý:** Các thông tin dưới đây chỉ nhằm mục đích tham khảo, vui lòng **không sao chép nguyên văn** cho bài báo cáo của bạn kể cả warning này.
-{{% /notice %}}
+**Tại trang này**, bạn sẽ tóm tắt hành trình học tập 12 tuần được phân nhóm theo các chủ đề AWS xuyên suốt chương trình.
 
-**Trong trang này** bạn sẽ cần giới thiệu worklog của bạn **như thế nào**? Bạn hoàn thành chương trình trong vòng **bao nhiêu tuần**? Bạn **đã làm gì** trong các tuần đó?
+Mỗi tuần dưới đây tương ứng với một nhóm chủ đề trong Hành trình Đám mây AWS (AWS Cloud Journey), từ thiết lập tài khoản, mạng và hạ tầng đến bảo mật, container, serverless, dữ liệu và máy học.
 
+**Tuần 1:** [Khởi đầu với AWS và kiểm soát chi phí](1.1-Week1/)
 
-Thông thường và cũng là tiêu chuẩn, một worklog được thực hiện trong khoảng 3 tháng (trong suốt thời gian thực tập) với nội dung các tuần như sau:
+**Tuần 2:** [Mạng, DNS và ứng dụng đa tầng](1.2-Week2/)
 
-**Tuần 1:** [Làm quen với AWS và các dịch vụ cơ bản trong AWS](1.1-week1/)
+**Tuần 3:** [IaC, CloudWatch và Systems Manager](1.3-Week3/)
 
-**Tuần 2:** [Làm công việc A...](1.2-week2/)
+**Tuần 4:** [Service Quotas, IAM và bảo mật dịch vụ](1.4-Week4/)
 
-**Tuần 3:** [Làm công việc B...](1.3-week3/)
+**Tuần 5:** [Bảo mật nâng cao, VPC Peering và tính sẵn sàng cao](1.5-Week5/)
 
-**Tuần 4:** [Làm công việc C...](1.4-week4/)
+**Tuần 6:** [Container, ECS, CI/CD và tối ưu hóa chi phí](1.6-Week6/)
 
-**Tuần 5:** [Làm công việc D...](1.5-week5/)
+**Tuần 7:** [Microservices, nền tảng Serverless và DevAx](1.7-Week7/)
 
-**Tuần 6:** [Làm công việc E...](1.6-week6/)
+**Tuần 8:** [Serverless Backend, xác thực và giám sát](1.8-Week8/)
 
-**Tuần 7:** [Làm công việc G...](1.7-week7/)
+**Tuần 9:** [Web app, tìm kiếm, tracing và triển khai](1.9-Week9/)
 
-**Tuần 8:** [Làm công việc H...](1.8-week8/)
+**Tuần 10:** [Lightsail, ECS, EKS và OpenShift](1.10-Week10/)
 
-**Tuần 9:** [Làm công việc I...](1.9-week9/)
+**Tuần 11:** [Data Lake, Analytics và PostgreSQL nâng cao](1.11-Week11/)
 
-**Tuần 10:** [Làm công việc L...](1.10-week10/)
-
-**Tuần 11:** [Làm công việc M...](1.11-week11/)
-
-**Tuần 12:** [Làm công việc N...](1.12-week12/)
+**Tuần 12:** [SageMaker, đánh giá và hoàn thiện hành trình](1.12-Week12/)

@@ -1,57 +1,76 @@
 ---
 title: "Week 9 Worklog"
-date: 2024-01-01
-weight: 1
+date: 2026-06-12
+weight: 9
 chapter: false
 pre: " <b> 1.9. </b> "
 ---
-{{% notice warning %}} 
-⚠️ **Note:** The following information is for reference purposes only. Please **do not copy verbatim** for your own report, including this warning.
-{{% /notice %}}
-
-
 ### Week 9 Objectives:
 
-* Connect and get acquainted with members of First Cloud AI Journey.
-* Understand basic AWS services, how to use the console & CLI.
+* Work with web development tools, system visibility, and application deployment.
+* Understand combined models across frontend, backend, and traditional infrastructure.
 
 ### Tasks to be carried out this week:
-| Day | Task                                                                                                                                                                                                   | Start Date | Completion Date | Reference Material                        |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------- | --------------- | ----------------------------------------- |
-| 2   | - Get acquainted with FCAJ members <br> - Read and take note of internship unit rules and regulations                                                                                                   | 08/11/2025 | 08/11/2025      |
-| 3   | - Learn about AWS and its types of services <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                              | 08/12/2025 | 08/12/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Create AWS Free Tier account <br> - Learn about AWS Console & AWS CLI <br> - **Practice:** <br>&emsp; + Create AWS account <br>&emsp; + Install & configure AWS CLI <br> &emsp; + How to use AWS CLI | 08/13/2025 | 08/13/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Learn basic EC2: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - SSH connection methods to EC2 <br> - Learn about Elastic IP   <br>                            | 08/14/2025 | 08/15/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Practice:** <br>&emsp; + Launch an EC2 instance <br>&emsp; + Connect via SSH <br>&emsp; + Attach an EBS volume                                                                                     | 08/15/2025 | 08/15/2025      | <https://cloudjourney.awsstudygroup.com/> |
+| Day | Task | Start Date | Completion Date | Reference Material | Status |
+| --- | --- | --- | --- | --- | --- |
+| 1 | AWS: Doc Mgmt CRUD & Amplify | 06/12/2026 | 06/12/2026 | Built CRUD workflows with Amplify support | Completed |
+| 2 | AWS: API Gateway & SAM | 06/13/2026 | 06/13/2026 | Integrated frontend and API layers | Completed |
+| 3 | AWS: CloudFront & Search | 06/14/2026 | 06/14/2026 | Optimized content delivery and search features | Completed |
+| 4 | AWS: X-Ray Tracing | 06/15/2026 | 06/15/2026 | Traced distributed requests across services | Completed |
+| 5 | AWS: Web App Workshop | 06/16/2026 | 06/16/2026 | Practiced serverless API and chat app patterns | Completed |
+| 6 | AWS: Elastic Beanstalk | 06/17/2026 | 06/17/2026 | Deployed Node.js applications with CI/CD | Completed |
+| 7 | AWS: WordPress | 06/18/2026 | 06/18/2026 | Reviewed WordPress deployment on EC2 | Completed |
 
 
-### Week 9 Achievements:
+### Daily Details
 
-* Understood what AWS is and mastered the basic service groups: 
-  * Compute
-  * Storage
-  * Networking 
-  * Database
-  * ...
+#### Day 1 - AWS: Doc Mgmt CRUD & Amplify
 
-* Successfully created and configured an AWS Free Tier account.
+* Built serverless CRUD and used Amplify for document management.
+#### Day 2 - AWS: API Gateway & SAM
 
-* Became familiar with the AWS Management Console and learned how to find, access, and use services via the web interface.
+* Connected the frontend to API Gateway and deployed the backend with SAM.
+#### Day 3 - AWS: CloudFront & Search
 
-* Installed and configured AWS CLI on the computer, including:
-  * Access Key
-  * Secret Key
-  * Default Region
-  * ...
+* Configured CDN delivery and added search for the application.
+#### Day 4 - AWS: X-Ray Tracing
 
-* Used AWS CLI to perform basic operations such as:
+* Traced distributed requests with X-Ray and CloudWatch to debug faster.
+#### Day 5 - AWS: Web App Workshop
 
-  * Check account & configuration information
-  * Retrieve the list of regions
-  * View EC2 service
-  * Create and manage key pairs
-  * Check information about running services
-  * ...
+* Practiced building a serverless API and chat application.
+#### Day 6 - AWS: Elastic Beanstalk
 
-* Acquired the ability to connect between the web interface and CLI to manage AWS resources in parallel.
-* ...
+* Deployed a Node.js app and set up CI/CD with Beanstalk.
+#### Day 7 - AWS: WordPress
+
+* Reviewed WordPress architecture on EC2 and basic operations.
+### Week 9 Outcomes:
+
+* Learned how to combine frontend, backend, CDN, and tracing in one web system.
+* Understood how to choose between serverless, Beanstalk, and traditional deployment.
+* Built the ability to analyze request flow and debug effectively.
+
+<!-- BEGIN EXCEL PROGRESS -->
+
+**Cập nhật từ Excel**
+
+- - Learn Amazon Lightsail Containers & ECS Basics  
+    
+  - Practice:  
+    
+  + Getting Started with Amazon Lightsail Containers  
+    
+  + Containerization with Amazon ECS and AWS Fargate (12/06/2026 → 14/06/2026)  
+Reference: https://cloudjourney.awsstudygroup.com/
+- - Learn Advanced ECS Management  
+    
+  - Practice:  
+    
+  + Infrastructure as Code for ECS with CDK  
+    
+  + CI/CD Pipeline for ECS Applications (15/06/2026 → 18/06/2026)  
+Reference: https://cloudjourney.awsstudygroup.com/
+
+<!-- END EXCEL PROGRESS -->
+

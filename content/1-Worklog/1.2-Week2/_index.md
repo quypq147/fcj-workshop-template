@@ -1,57 +1,55 @@
 ---
 title: "Week 2 Worklog"
-date: 2024-01-01
-weight: 1
+date: 2026-04-24
+weight: 2
 chapter: false
 pre: " <b> 1.2. </b> "
 ---
-{{% notice warning %}} 
-⚠️ **Note:** The following information is for reference purposes only. Please **do not copy verbatim** for your own report, including this warning.
-{{% /notice %}}
+
 
 
 ### Week 2 Objectives:
 
-* Connect and get acquainted with members of First Cloud AI Journey.
-* Understand basic AWS services, how to use the console & CLI.
+* Understand how networking, DNS, and application connectivity work on AWS.
+* Get familiar with workshops on multi-tier architecture and content delivery.
 
 ### Tasks to be carried out this week:
-| Day | Task                                                                                                                                                                                                   | Start Date | Completion Date | Reference Material                        |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------- | --------------- | ----------------------------------------- |
-| 2   | - Get acquainted with FCAJ members <br> - Read and take note of internship unit rules and regulations                                                                                                   | 08/11/2025 | 08/11/2025      |
-| 3   | - Learn about AWS and its types of services <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                              | 08/12/2025 | 08/12/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Create AWS Free Tier account <br> - Learn about AWS Console & AWS CLI <br> - **Practice:** <br>&emsp; + Create AWS account <br>&emsp; + Install & configure AWS CLI <br> &emsp; + How to use AWS CLI | 08/13/2025 | 08/13/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Learn basic EC2: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - SSH connection methods to EC2 <br> - Learn about Elastic IP   <br>                            | 08/14/2025 | 08/15/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Practice:** <br>&emsp; + Launch an EC2 instance <br>&emsp; + Connect via SSH <br>&emsp; + Attach an EBS volume                                                                                     | 08/15/2025 | 08/15/2025      | <https://cloudjourney.awsstudygroup.com/> |
+| Day | Task | Start Date | Completion Date | Reference Material | Status |
+| --- | --- | --- | --- | --- | --- |
+| 1 | AWS: Route 53 & CLI | 04/24/2026 | 04/24/2026 | Practiced DNS management with Route 53 and CLI operations | Completed |
+| 2 | AWS: DynamoDB & ElastiCache | 04/25/2026 | 04/25/2026 | Learned NoSQL and caching in application architecture | Completed |
+| 3 | AWS: Networking Workshop | 04/26/2026 | 04/26/2026 | Reinforced networking, subnets, and component connectivity | Completed |
+| 4 | AWS: CloudFront & Lambda@Edge | 04/27/2026 | 04/27/2026 | Implemented content delivery and edge processing | Completed |
+| 5 | AWS: Windows & Web Apps | 04/28/2026 | 04/28/2026 | Learned Windows workloads and high-availability web apps | Completed |
+| 6 | AWS: VM & DB Migration | 04/29/2026 | 04/29/2026 | Learned how to migrate VMs and databases to AWS | Completed |
+| 7 | AWS: Disaster Recovery | 04/30/2026 | 04/30/2026 | Learned recovery patterns with AWS Elastic Disaster Recovery | Completed |
 
 
-### Week 2 Achievements:
+### Daily Details
 
-* Understood what AWS is and mastered the basic service groups: 
-  * Compute
-  * Storage
-  * Networking 
-  * Database
-  * ...
+#### Day 1 - AWS: Route 53 & CLI
 
-* Successfully created and configured an AWS Free Tier account.
+* Reviewed DNS concepts, managed Route 53 records, and used the CLI to inspect resources.
+#### Day 2 - AWS: DynamoDB & ElastiCache
 
-* Became familiar with the AWS Management Console and learned how to find, access, and use services via the web interface.
+* Compared NoSQL storage with caching patterns to decide when to use DynamoDB or ElastiCache.
+#### Day 3 - AWS: Networking Workshop
 
-* Installed and configured AWS CLI on the computer, including:
-  * Access Key
-  * Secret Key
-  * Default Region
-  * ...
+* Reinforced VPC, subnet, and routing behavior through a hands-on networking workshop.
+#### Day 4 - AWS: CloudFront & Lambda@Edge
 
-* Used AWS CLI to perform basic operations such as:
+* Learned CDN delivery and edge processing with CloudFront and Lambda@Edge.
+#### Day 5 - AWS: Windows & Web Apps
 
-  * Check account & configuration information
-  * Retrieve the list of regions
-  * View EC2 service
-  * Create and manage key pairs
-  * Check information about running services
-  * ...
+* Saw how to run Windows workloads and configure highly available web apps.
+#### Day 6 - AWS: VM & DB Migration
 
-* Acquired the ability to connect between the web interface and CLI to manage AWS resources in parallel.
-* ...
+* Studied migration approaches for virtual machines and databases moving into AWS.
+#### Day 7 - AWS: Disaster Recovery
+
+* Learned disaster recovery patterns and AWS roles in resilience planning.
+### Week 2 Outcomes:
+
+* Understood DNS, CDN, and caching concepts on AWS.
+* Clarified how DynamoDB, ElastiCache, and CloudFront fit application architecture.
+* Built a clearer view of how AWS supports traditional workloads, migration, and disaster recovery.
