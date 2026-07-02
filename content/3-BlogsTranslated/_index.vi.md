@@ -6,10 +6,6 @@ chapter: false
 pre: " <b> 3. </b> "
 ---
 
-{{% notice warning %}}  
-⚠️ **Lưu ý:** Các thông tin dưới đây chỉ nhằm mục đích tham khảo, vui lòng **không sao chép nguyên văn** cho bài báo cáo của bạn kể cả warning này.
-{{% /notice %}}
-
 Tại đây sẽ là phần liệt kê, giới thiệu các blogs mà các bạn đã đăng trên [AWS Study Group](https://www.facebook.com/groups/awsstudygroupfcj).
 
 ### [Blog 1 - ĐƠN GIẢN HÓA TÍCH HỢP AWS APPSYNC EVENTS VỚI POWERTOOLS FOR AWS LAMBDA](3.1-Blog1/)

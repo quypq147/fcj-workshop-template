@@ -6,10 +6,6 @@ chapter: false
 pre: " <b> 3. </b> "
 ---
 
-{{% notice warning %}}
-⚠️ **Note:** The information below is for reference purposes only. Please **do not copy verbatim** for your own report, including this warning.
-{{% /notice %}}
-
 This section lists and introduces the blogs you have posted in the [AWS Study Group](https://www.facebook.com/groups/awsstudygroupfcj).
 
 ### [Blog 1 - Simplify AWS AppSync Events integration with Powertools for AWS Lambda](3.1-Blog1/)
