@@ -52,7 +52,7 @@ pre: " <b> 1.1. </b> "
 * Compared Lightsail with more flexible AWS services.
 #### Day 7 - AWS: Auto Scaling & CloudWatch
 
-* Monitored metrics, logs, and alarms in CloudWatch.
+* Monitored metrics, logs, and alarms in CloudWatch
 * Learned how Auto Scaling responds to system load.
 ### Week 1 Outcomes:
 
