@@ -7,7 +7,7 @@ pre: " <b> 5. </b> "
 ---
 # AWS CDK & Serverless Architecture: Building a Serverless Event-Driven Application
 
-Welcome to the AWS hands-on lab! In this workshop, you will build and deploy a modern, scalable, and secure Serverless Event-Driven Architecture using AWS Cloud Development Kit (CDK) in TypeScript.
+Welcome to the AWS hands-on lab! In this workshop, you will design and deploy a modern, scalable, and highly secure Serverless Event-Driven Architecture using AWS Cloud Development Kit (CDK) with TypeScript.
 
 #### Workshop Contents
 
@@ -18,4 +18,4 @@ Welcome to the AWS hands-on lab! In this workshop, you will build and deploy a m
 5. [Module 3: Security & Permissions](5.5-Module3-Security/)
 6. [Module 4: Serverless Backend & AWS SDK v3](5.6-Module4-Serverless/)
 7. [Deployment & Testing](5.7-Deployment-Testing/)
-8. [Clean-up Advanced](5.8-Cleanup-Advanced/)
+8. [Cleanup & Advanced](5.8-Cleanup-Advanced/)

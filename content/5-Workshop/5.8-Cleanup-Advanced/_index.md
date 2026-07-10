@@ -5,17 +5,29 @@ weight: 8
 chapter: false
 pre: " <b> 5.8. </b> "
 ---
-# Cleanup & Advanced Topics
+# Clean up Resources
 
-### 1. Cleanup Resources
-To prevent charges, always destroy the resources after you finish testing:
+To avoid unexpected charges after evaluation and grading of the project, we need to completely remove the application from AWS Cloud.
+
+### 1. Destroy Backend Infrastructure Using CDK
+Run the following command in the infra directory to tear down all CloudFormation Stacks and related resources (DynamoDB, SQS, API Gateway, Lambdas, etc.):
+
 ```bash
 cdk destroy --all
 ```
 
-### 2. Infrastructure Testing (Jest)
-Verify stack resources properties automatically.
-Create `test/infra.test.ts`:
+![Remove CDK Destroy Resources](/images/5-Workshop/cdk_destroy_cleanup.png)
+*Figure 11: Confirmation screen showing all stacks successfully deleted via cdk destroy*
+
+### 2. Remove Application from AWS Amplify Console
+Navigate to the AWS Amplify service on the Console, select your application, click **Actions** in the top-right corner, and choose **Delete app** to completely delete the frontend hosting and configuration.
+
+---
+
+### 3. Advanced Topic: Automated Infrastructure Testing (Jest)
+Write automated tests to ensure the infrastructure always complies with project policies.
+Create the file `test/infra.test.ts`:
+
 ```typescript
 import * as cdk from 'aws-cdk-lib';
 import { Template } from 'aws-cdk-lib/assertions';

@@ -6,23 +6,23 @@ chapter: false
 pre: " <b> 5.6. </b> "
 ---
 
-# Module 4: Serverless Backend & Application Programming (AWS SDK v3)
+# Module 4: Serverless Backend & Observability
 
-In this module, you will implement the asynchronous data ingestion and event processing logic using **AWS SDK v3** in TypeScript. This decoupled architecture uses API Gateway, Lambda, DynamoDB, Amazon SQS, and Amazon EventBridge.
+In this section, you will implement the asynchronous data ingestion and event processing logic (Asynchronous Data Ingestion & Event Processing) using the modular **AWS SDK v3** in TypeScript. This architecture utilizes an event-driven model (Event-Driven Architecture) via API Gateway, AWS Lambda, DynamoDB (Single-Table Design), Amazon SQS, Dead-Letter Queue (DLQ), and Amazon EventBridge.
 
 ---
 
 ## Part 1: Overview & Prerequisites
 
-### 1. Architectural Flow
-To support high-throughput, decoupled, and reliable request processing, the platform implements an **event-driven architecture**:
-1. The **Ingestion Lambda** receives a request from API Gateway.
-2. It performs a **DynamoDB Conditional Write** to store the initial state as "PENDING" and registers the client-provided `Idempotency-Key` to prevent duplicate processing.
-3. It integrates with an external third-party service (simulated).
-4. Upon success, it publishes a `data.received` event to an **Amazon EventBridge Custom Bus**.
-5. EventBridge routes this event to an **SQS Processing Queue**.
-6. The **Worker Lambda (SQS Consumer)** polls the queue, checks for duplicates, updates the DynamoDB record to "COMPLETED", and handles failures.
-7. Any persistently failing messages are sent to the **Dead-Letter Queue (DLQ)**.
+### 1. System Architecture Flow
+To handle load spikes, achieve component decoupling, and ensure data safety, the system implements an event-driven asynchronous processing model:
+1. **Ingestion Lambda** receives request payloads from API Gateway.
+2. The Lambda performs a **Conditional Write** to DynamoDB, initializing the request status as `PENDING` and storing an `Idempotency-Key` to prevent duplicate processing.
+3. It integrates with a third-party service (simulated).
+4. After successful integration, the Lambda publishes a `data.received` event to the **EventBridge Custom Bus**.
+5. EventBridge routes this event to the **SQS Processing Queue**.
+6. **Worker Lambda (SQS Consumer)** polls the messages in batches, verifies duplicates (Idempotent Consumer), updates the record status in DynamoDB to `COMPLETED`, and handles further business logic.
+7. Any messages that fail repeatedly are eventually routed to a **Dead-Letter Queue (DLQ)** for later handling.
 
 ```mermaid
 graph LR
@@ -31,15 +31,15 @@ graph LR
     IngestionLambda -->|3. Conditional Write| DDB[(DynamoDB Single-Table)]
     IngestionLambda -->|4. Publish Event| EB[EventBridge Custom Bus]
     EB -->|5. Route Event| SQS[SQS Processing Queue]
-    SQS -->|6. Poll Batch| WorkerLambda[Worker Lambda]
+    SQS -->|6. Retrieve Message| WorkerLambda[Worker Lambda]
     WorkerLambda -->|7. Update Status| DDB
-    WorkerLambda -.->|Failed Messages| DLQ[SQS Dead-Letter Queue]
+    WorkerLambda -.->|Failure Handling| DLQ[SQS Dead-Letter Queue]
 ```
 
-### 2. NPM Dependencies
-AWS SDK v3 is modular, meaning you only install the client libraries you actually use. This reduces the Lambda package size and improves cold-start times.
+### 2. Install NPM Dependencies
+AWS SDK v3 is designed modularly, which reduces Lambda package sizes and significantly improves cold-start times.
 
-Run the following command in your Lambda service directory:
+Run the following command in the directory containing the Lambda source code:
 ```bash
 npm install @aws-sdk/client-dynamodb @aws-sdk/client-sqs @aws-sdk/client-eventbridge @aws-sdk/lib-dynamodb
 npm install --save-dev @types/aws-lambda typescript
@@ -49,17 +49,17 @@ npm install --save-dev @types/aws-lambda typescript
 
 ## Part 2: Step-by-Step SDK Implementation
 
-### 1. Ingestion Service Lambda (Event Publisher)
-Create the ingestion function to validate the request, save the initial state with conditional constraints to avoid duplicates, and publish the event.
+### 1. Ingestion Service Lambda (Event Publishing Flow)
+Implement the Lambda handling the ingestion flow: it executes a conditional write with an `Idempotency-Key` in DynamoDB, and then publishes an event to the EventBridge Custom Bus.
 
-Create `services/ingestion/index.ts`:
+Create the file `services/ingestion/index.ts`:
 ```typescript
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from "aws-lambda";
 import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
 import { DynamoDBDocumentClient, PutCommand } from "@aws-sdk/lib-dynamodb";
 import { EventBridgeClient, PutEventsCommand } from "@aws-sdk/client-eventbridge";
 
-// Initialize SDK clients (Clients are reused across Lambda invocations)
+// Initialize SDK Clients outside the handler to reuse connections across Lambda executions
 const ddbClient = new DynamoDBClient({});
 const docClient = DynamoDBDocumentClient.from(ddbClient);
 const eventBridgeClient = new EventBridgeClient({});
@@ -68,7 +68,7 @@ const TABLE_NAME = process.env.TABLE_NAME || "";
 const EVENT_BUS_NAME = process.env.EVENT_BUS_NAME || "";
 
 export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
-  console.log("Received event:", JSON.stringify(event));
+  console.log("Event received:", JSON.stringify(event));
 
   try {
     if (!event.body) {
@@ -80,6 +80,7 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
 
     const { id, userId, dataPayload, idempotencyKey } = JSON.parse(event.body);
 
+    // Validate required parameters
     if (!id || !userId || !dataPayload || !idempotencyKey) {
       return {
         statusCode: 400,
@@ -87,14 +88,13 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
       };
     }
 
-    // 1. Store initial status with DynamoDB Conditional Write
-    // Use the idempotencyKey to prevent duplicate creations
     const pk = `INGESTION#${id}`;
     const sk = "METADATA";
 
-    console.log(`Attempting conditional write for PK: ${pk}`);
+    console.log(`Performing conditional write for request: ${pk}`);
     
     try {
+      // 1. Perform Conditional Write in DynamoDB to prevent duplicates
       await docClient.send(
         new PutCommand({
           TableName: TABLE_NAME,
@@ -108,29 +108,30 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
             createdAt: new Date().toISOString(),
             updatedAt: new Date().toISOString(),
           },
-          // Ensure we don't overwrite if PK & SK already exist (guarantees idempotency)
+          // Condition: Only write if PK does not exist. Prevents overwriting on duplicate requests.
           ConditionExpression: "attribute_not_exists(PK)",
         })
       );
     } catch (dbError: any) {
+      // Catch error when write condition fails (ID already exists)
       if (dbError.name === "ConditionalCheckFailedException") {
-        console.warn(`Duplicate submission detected for ID: ${id}`);
+        console.warn(`Duplicate request detected with ID: ${id}`);
         return {
           statusCode: 409,
           body: JSON.stringify({ error: "Request already exists or is being processed" }),
         };
       }
-      throw dbError;
+      throw dbError; // Throw other DB errors to be handled globally
     }
 
-    // 2. Simulate 3rd Party Integration
-    console.log(`Processing simulated integration for payload ID: ${id}`);
+    // 2. Simulate third-party service integration
+    console.log(`Processing simulated integration for request ID: ${id}`);
     const isIntegrationSuccessful = await simulateThirdPartyCall(id);
     if (!isIntegrationSuccessful) {
-      throw new Error("External service integration failed");
+      throw new Error("External integration transaction failed");
     }
 
-    // 3. Publish data.received event to EventBridge Custom Bus
+    // 3. Publish data.received event to the Custom EventBridge Bus upon success
     console.log(`Publishing data.received event to custom bus: ${EVENT_BUS_NAME}`);
     const eventPayload = {
       id,
@@ -157,25 +158,25 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
       statusCode: 201,
       headers: { "Access-Control-Allow-Origin": "*" },
       body: JSON.stringify({
-        message: "Request ingested successfully",
+        message: "Request successfully initialized",
         id,
         status: "PENDING",
       }),
     };
   } catch (error: any) {
-    console.error("Error in ingestion handler:", error);
+    console.error("Error in Ingestion Handler:", error);
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: error.message || "Internal Server Error" }),
+      body: JSON.stringify({ error: error.message || "Internal system error" }),
     };
   }
 };
 
-// Simulated external API call
+// Helper function to simulate a third-party API call
 async function simulateThirdPartyCall(id: string): Promise<boolean> {
   // Simulate network latency
   await new Promise((resolve) => setTimeout(resolve, 500));
-  // Fail integration if ID contains "fail" for testing
+  // For testing: simulate a failure if the ID contains the string "fail"
   if (id.includes("fail")) {
     return false;
   }
@@ -183,10 +184,10 @@ async function simulateThirdPartyCall(id: string): Promise<boolean> {
 }
 ```
 
-### 2. Worker Lambda Consumer (SQS Consumer)
-Create the asynchronous processing worker that reads SQS message batches, updates DynamoDB, and handles idempotency check at the consumer level.
+### 2. Worker Lambda Consumer (Asynchronous Flow via SQS)
+Implement the Lambda processing SQS Queue: Poll messages, verify duplicates (Idempotent Consumer) using DynamoDB, update request status, and support partial batch failures (Partial Batch Failure).
 
-Create `services/worker/index.ts`:
+Create the file `services/worker/index.ts`:
 ```typescript
 import { SQSEvent, SQSBatchResponse, SQSRecord } from "aws-lambda";
 import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
@@ -197,7 +198,7 @@ const docClient = DynamoDBDocumentClient.from(ddbClient);
 const TABLE_NAME = process.env.TABLE_NAME || "";
 
 export const handler = async (event: SQSEvent): Promise<SQSBatchResponse> => {
-  console.log(`Processing batch of ${event.Records.length} records`);
+  console.log(`Processing a batch of ${event.Records.length} SQS records`);
   
   const batchItemFailures: { itemIdentifier: string }[] = [];
 
@@ -205,31 +206,31 @@ export const handler = async (event: SQSEvent): Promise<SQSBatchResponse> => {
     try {
       await processMessage(record);
     } catch (err) {
-      console.error(`Failed to process message ${record.messageId}:`, err);
-      // Track failed message IDs to return to SQS for retry
+      console.error(`Processing message ${record.messageId} failed:`, err);
+      // Track the ID of the failed message
       batchItemFailures.push({ itemIdentifier: record.messageId });
     }
   }
 
-  // Returning batchItemFailures tells SQS only to retry the failed messages,
-  // preventing reprocessing of successful messages in this batch.
+  // Return list of failed messages so SQS retains them in the queue for retry,
+  // while successfully processed messages are automatically deleted from the queue.
   return { batchItemFailures };
 };
 
 async function processMessage(record: SQSRecord): Promise<void> {
   const messageBody = JSON.parse(record.body);
   
-  // Extract custom event data forwarded from EventBridge
+  // Extract event details sent by EventBridge
   const details = messageBody.detail;
   if (!details || !details.id) {
-    console.warn(`Invalid message schema, skipping. Message ID: ${record.messageId}`);
+    console.warn(`Invalid message format, skipping. Message ID: ${record.messageId}`);
     return;
   }
 
   const { id, userId, dataPayload } = details;
 
-  // 1. Idempotent Consumer Pattern: Save message process tracking key
-  // Avoid duplicate processing of the same SQS message
+  // 1. Idempotent Consumer Pattern: Track processed message IDs
+  // Goal: Prevent reprocessing duplicate SQS messages due to retry mechanisms or network instability
   const idempotencyPk = `IDEMPOTENCY#MSG#${record.messageId}`;
   const idempotencySk = `INGESTION#${id}`;
 
@@ -241,27 +242,27 @@ async function processMessage(record: SQSRecord): Promise<void> {
           PK: idempotencyPk,
           SK: idempotencySk,
           processedAt: new Date().toISOString(),
-          ttl: Math.floor(Date.now() / 1000) + 86400, // 24-hour retention
+          ttl: Math.floor(Date.now() / 1000) + 86400, // Auto-expire after 24 hours
         },
         ConditionExpression: "attribute_not_exists(PK)",
       })
     );
   } catch (dbError: any) {
     if (dbError.name === "ConditionalCheckFailedException") {
-      console.warn(`SQS Message already processed: ${record.messageId}. Skipping.`);
-      return; // Skip execution safely
+      console.warn(`SQS message already processed: ${record.messageId}. Skipping execution.`);
+      return; // Ignore duplicate message execution safely without throwing error to prevent infinite retry loops
     }
     throw dbError;
   }
 
-  // 2. Simulate Failure Scenario for DLQ Testing
-  // If dataPayload contains a failProcessing flag, force fail processing to trigger retry -> DLQ
+  // 2. Simulate failure scenario to test DLQ
+  // If the dataPayload contains a failProcessing flag set to true, throw an error intentionally so the message is pushed to DLQ after exceeding maxReceiveCount
   if (dataPayload && dataPayload.failProcessing === true) {
-    throw new Error(`[SIMULATED_FAILURE] Processing failed for request ${id} due to failProcessing flag`);
+    throw new Error(`[SIMULATED_FAILURE] Simulated failure for request ${id} due to failProcessing configuration`);
   }
 
-  // 3. Update Status to "COMPLETED" in DynamoDB
-  console.log(`Updating status to COMPLETED for ingestion ID: ${id}`);
+  // 3. Update status to "COMPLETED" in the DynamoDB Single-Table
+  console.log(`Updating status to COMPLETED for ID: ${id}`);
   await docClient.send(
     new UpdateCommand({
       TableName: TABLE_NAME,
@@ -277,18 +278,18 @@ async function processMessage(record: SQSRecord): Promise<void> {
     })
   );
 
-  console.log(`Successfully completed processing for ID: ${id}`);
+  console.log(`Successfully processed request: ${id}`);
 }
 ```
 
 ---
 
-## Part 3: IAM Permissions & SQS Configurations
+## Part 3: IAM & SQS Configurations
 
-### 1. IAM Configurations (Principle of Least Privilege)
-To ensure the Lambda functions only have access to what they need, declare explicit IAM roles instead of administrative permissions.
+### 1. Configure Least Privilege Permissions
+To ensure system security, set up IAM Roles with specific permissions, minimizing the use of administrator wildcard permissions (`*`).
 
-Here is the configuration logic represented in **AWS CDK**:
+Code declaration for corresponding infrastructure permissions in **AWS CDK (TypeScript)**:
 
 ```typescript
 import * as iam from "aws-cdk-lib/aws-iam";
@@ -297,10 +298,10 @@ import * as lambda from "aws-cdk-lib/aws-lambda";
 import * as dynamodb from "aws-cdk-lib/aws-dynamodb";
 import * as events from "aws-cdk-lib/aws-events";
 
-// A. Ingestion Lambda Role Permissions
+// A. Permissions for Ingestion Lambda
 const ingestionLambda = new lambda.Function(this, "IngestionLambda", { /* ... */ });
 
-// Grant Ingestion Lambda permissions to put items in DynamoDB
+// Allow Ingestion Lambda to write new records into DynamoDB
 ingestionLambda.addToRolePolicy(new iam.PolicyStatement({
   effect: iam.Effect.ALLOW,
   actions: [
@@ -309,7 +310,7 @@ ingestionLambda.addToRolePolicy(new iam.PolicyStatement({
   resources: [props.table.tableArn],
 }));
 
-// Grant Ingestion Lambda permissions to publish events to Custom EventBus
+// Allow Ingestion Lambda to publish events to EventBridge Custom Bus
 ingestionLambda.addToRolePolicy(new iam.PolicyStatement({
   effect: iam.Effect.ALLOW,
   actions: [
@@ -319,10 +320,10 @@ ingestionLambda.addToRolePolicy(new iam.PolicyStatement({
 }));
 
 
-// B. Worker Lambda Role Permissions
+// B. Permissions for Worker Lambda
 const workerLambda = new lambda.Function(this, "WorkerLambda", { /* ... */ });
 
-// Grant Worker Lambda permissions to query, update items in DynamoDB
+// Allow Worker Lambda to write idempotency markers and update request status
 workerLambda.addToRolePolicy(new iam.PolicyStatement({
   effect: iam.Effect.ALLOW,
   actions: [
@@ -332,7 +333,7 @@ workerLambda.addToRolePolicy(new iam.PolicyStatement({
   resources: [props.table.tableArn],
 }));
 
-// Grant SQS Consumer Lambda permissions to receive and delete messages
+// Allow Worker Lambda to receive and delete SQS messages
 workerLambda.addToRolePolicy(new iam.PolicyStatement({
   effect: iam.Effect.ALLOW,
   actions: [
@@ -344,43 +345,44 @@ workerLambda.addToRolePolicy(new iam.PolicyStatement({
 }));
 ```
 
-### 2. SQS Timeout and Visibility Settings
-When integrating SQS with Lambda, the **Visibility Timeout** of the SQS Queue is a crucial reliability parameter. 
+### 2. Configure SQS Visibility Timeout
+When integrating SQS as an AWS Lambda trigger, configuring the `visibilityTimeout` of the SQS queue is critical to system reliability.
 
 ```typescript
+// Define Dead-Letter Queue (DLQ)
 const processingDlq = new sqs.Queue(this, "ProcessingDLQ", {
   queueName: "processing-dlq",
-  retentionPeriod: cdk.Duration.days(14), // Retain for debugging
+  retentionPeriod: cdk.Duration.days(14), // Retained for 14 days for debugging
 });
 
+// Define Main Queue
 const processingQueue = new sqs.Queue(this, "ProcessingQueue", {
   queueName: "processing-queue",
-  // Crucial: Must be greater than or equal to Lambda's Timeout
+  // REQUIRED: visibilityTimeout must be greater than the maximum timeout of the Lambda Consumer
   visibilityTimeout: cdk.Duration.seconds(180), // 3 minutes
   deadLetterQueue: {
     queue: processingDlq,
-    maxReceiveCount: 3, // Move to DLQ after 3 failures
+    maxReceiveCount: 3, // Automatically route to DLQ after 3 failures
   },
 });
 ```
 
-#### Why `visibilityTimeout` must be greater than Lambda's timeout:
-- **The Concept**: When Lambda polls SQS, it pulls messages and locks them for the duration of the `visibilityTimeout`.
-- **The Issue**: If the Lambda function's timeout is set to 30 seconds, but the SQS Visibility Timeout is set to 15 seconds, and a message takes 20 seconds to process:
-  1. The visibility lock expires at 15 seconds.
-  2. SQS makes the message visible again to other pollers.
-  3. Another Lambda instance picks up the exact same message while the first instance is still running.
-  4. This causes duplicate executions and potential race conditions.
-- **The Best Practice**: Set the SQS `visibilityTimeout` to **at least 6 times** the Lambda function timeout plus any batch window buffer. 
+#### Why must `visibilityTimeout` be greater than the Lambda Timeout?
+- **How it works**: When Lambda polls SQS, it temporarily locks (hides) those messages from other pollers for the duration of the `visibilityTimeout`.
+- **If the `visibilityTimeout` is too short**: For example, if the Lambda timeout is 30 seconds but the SQS `visibilityTimeout` is set to 15 seconds. If processing a heavy message takes 20 seconds:
+  1. At the 15th second, SQS automatically unlocks the message since the visibility window expired.
+  2. Another Lambda instance will immediately poll the exact same message and run it in parallel.
+  3. This leads to duplicate executions and race conditions.
+- **Golden Rule**: Always configure the SQS `visibilityTimeout` to be **at least 6 times** the maximum timeout of the Lambda Consumer, plus a small buffer.
 
 ---
 
 ## Part 4: Testing & Observability
 
-### 1. Test Payloads
+### 1. Sample Test Payloads
 
-#### Test A: Triggering Ingestion Service (API Gateway Request)
-Use this JSON payload to test the `/ingest` POST endpoint.
+#### Scenario A: Successful Ingestion API Call (API Gateway Request)
+Use the following payload to invoke the HTTP `POST /ingest` endpoint on API Gateway:
 
 ```json
 {
@@ -394,14 +396,14 @@ Use this JSON payload to test the `/ingest` POST endpoint.
 }
 ```
 
-*Expected Output (First request)*:
-`201 Created` with body `{"message":"Request ingested successfully","id":"REQ-2026-999-TEST","status":"PENDING"}`
+*Expected Result (First Invocation)*:
+HTTP status `201 Created` returning `{"message":"Request successfully initialized","id":"REQ-2026-999-TEST","status":"PENDING"}`.
 
-*Expected Output (Second request with same body)*:
-`409 Conflict` with body `{"error":"Request already exists or is being processed"}` (Idempotence works!).
+*Expected Result (Second Invocation with identical payload)*:
+HTTP status `409 Conflict` returning `{"error":"Request already exists or is being processed"}` (verifies Idempotency logic works).
 
-#### Test B: Simulating SQS Dead-Letter Queue (DLQ) Movement
-To test DLQ ingestion, send a request triggering the processing error. Set the payload `failProcessing` parameter to `true`.
+#### Scenario B: Testing the Dead-Letter Queue (DLQ)
+Send an ingestion request containing the `failProcessing: true` property to simulate a processing failure:
 
 ```json
 {
@@ -414,19 +416,19 @@ To test DLQ ingestion, send a request triggering the processing error. Set the p
 }
 ```
 
-*Expected Flow*:
-1. The Ingestion Lambda executes, registers the request, and publishes the event.
-2. The Worker Lambda picks up the message from SQS.
-3. The Worker throws `[SIMULATED_FAILURE] Processing failed for request...`.
-4. The message returns to the queue. This repeats 3 times (`maxReceiveCount`).
-5. After the 3rd attempt, the message is automatically moved to `processing-dlq`.
+*Test Execution Flow*:
+1. Ingestion Lambda accepts the request, records the pending status in DynamoDB, and publishes the event to EventBridge.
+2. SQS receives the event and triggers the Worker Lambda.
+3. The Worker detects the `failProcessing: true` property and throws a simulated error: `[SIMULATED_FAILURE] Simulated failure...`.
+4. The message is returned to the SQS queue. SQS retries up to 3 times (`maxReceiveCount`).
+5. After the 3rd failed attempt, the message is automatically moved to the dead-letter queue `processing-dlq`.
 
 ---
 
 ### 2. Observability & Tracing
 
-#### A. Structured Logging with CloudWatch
-Using `console.log(JSON.stringify(event))` creates **Structured JSON Logs** in CloudWatch. This allows you to run **CloudWatch Logs Insights** queries like:
+#### A. Querying Structured Logs in CloudWatch Logs
+Since the Lambda logs are written using `console.log(JSON.stringify(event))` or serialized JSON, CloudWatch Logs stores them as **Structured Logs**. You can use **CloudWatch Logs Insights** to quickly query logs:
 
 ```sql
 fields @timestamp, @message, id, error
@@ -435,10 +437,10 @@ fields @timestamp, @message, id, error
 | limit 20
 ```
 
-#### B. Distributed Tracing with AWS X-Ray
-To trace a request end-to-end (API Gateway -> SQS -> Lambda -> EventBridge -> DynamoDB):
+#### B. Enable Distributed Tracing with AWS X-Ray
+Trace requests end-to-end from API Gateway -> SQS -> Lambda -> EventBridge -> DynamoDB:
 
-1. **Enable Active Tracing** in CDK for Lambda functions:
+1. **Enable Active Tracing** for Lambda in CDK:
    ```typescript
    const ingestionLambda = new lambda.Function(this, "IngestionLambda", {
      // ...
@@ -454,4 +456,7 @@ To trace a request end-to-end (API Gateway -> SQS -> Lambda -> EventBridge -> Dy
    });
    ```
 3. **Analyze the Trace Map**:
-   Navigate to AWS console -> **CloudWatch** -> **X-Ray traces** -> **Service map**. You will see the visual flow showing latency metrics, error rates, and communication links across each hops.
+   Navigate to AWS Console -> **CloudWatch** -> **X-Ray traces** -> **Service map**. The map will clearly display the request flow, latency, and error rates of each node in the architecture.
+
+![AWS X-Ray Service Map](/images/5-Workshop/xray_service_map.png)
+*Figure 7: Service Map showing the tracing flow between services in CloudWatch X-Ray*

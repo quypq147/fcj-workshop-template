@@ -7,10 +7,11 @@ pre: " <b> 5.1. </b> "
 ---
 # Workshop Overview
 
-### 1. Why AWS CDK?
-Traditionally, Infrastructure as Code (IaC) relied on static YAML/JSON templates. **AWS CDK** allows developers to define cloud resources using familiar programming languages like **TypeScript**. This brings strong typing, autocompletion, inheritance, and code reuse to cloud infrastructure definition.
+**Context & Problem Statement:**
+This workshop simulates the process of building a Serverless e-commerce platform on AWS, integrated with a Next.js Frontend. The goal is to address the challenge of scaling dynamically during traffic spikes, optimizing costs, and reducing infrastructure management overhead.
 
-### 2. Serverless Event-Driven Architecture
-Modern web applications require high reliability and cost-efficiency. This workshop demonstrates a **Serverless Event-Driven Architecture** that scales automatically to handle traffic spikes and guarantees high availability without active server administration.
+**Solution Architecture Diagram (Target):**
+Below is the overall architecture diagram of the project, illustrating the request flow from the user via Route 53 to AWS Amplify, API Gateway, and backend processing through various Serverless services:
 
-We will use Amazon API Gateway for REST endpoints, AWS Lambda for serverless compute, Amazon DynamoDB for scalable single-table data storage, Amazon SQS for message queuing, and Amazon EventBridge for custom event routing.
+![AWS Serverless E-Commerce Architecture](/images/5-Workshop/architecture.png)
+*Figure 1: Overall Serverless E-commerce Architecture Diagram for the FCAJ project*

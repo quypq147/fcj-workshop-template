@@ -7,15 +7,15 @@ pre: " <b> 5.2. </b> "
 ---
 # Prerequisites & Project Setup
 
-### 1. Tools Required
-Before starting, ensure you have the following installed:
-*   **Node.js** (LTS v18 or v20)
-*   **AWS CLI v2** configured via `aws configure`
-*   **AWS CDK v2** installed globally: `npm install -g aws-cdk`
-*   **TypeScript** compiler: `npm install -g typescript`
+Before starting, ensure your environment is set up:
+*   Install Node.js, AWS CLI, and AWS CDK.
+*   Configure credentials with AWS (using `aws configure`).
 
-### 2. Initialize Project
-Create a new directory and initialize the CDK app:
+![AWS Account Credentials](/images/5-Workshop/aws_configure_sts.png)
+*Figure 2: AWS credentials configuration and identity check results (get-caller-identity)*
+
+### Initialize CDK Project
+Create a new directory and initialize the CDK app with TypeScript:
 ```bash
 mkdir ecommerce-platform-infra
 cd ecommerce-platform-infra

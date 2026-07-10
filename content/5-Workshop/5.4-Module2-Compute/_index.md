@@ -7,9 +7,27 @@ pre: " <b> 5.4. </b> "
 ---
 # Module 2: Compute & API Gateway
 
-Wire a backend Lambda function and expose it through API Gateway. Since we are using a fully serverless architecture, the Lambda function runs in the default AWS-managed network and communicates directly with DynamoDB.
+**Step 1: Write and Configure AWS Lambda Services & SQS**
+Set up the business Lambda Functions (Product Service, Order Service, Checkout Service). Use an SQS Order Queue as a buffer before Lambda processes orders to prevent overload.
 
-Create `lib/api-stack.ts`:
+> 📸 **[PRACTICAL SCREENSHOT GUIDE 4 - LIST OF LAMBDA FUNCTIONS]**
+> *   **Step 1:** On the AWS Console, access the **AWS Lambda** service.
+> *   **Step 2:** Click on **Functions** in the left menu.
+> *   **Step 3:** Use the search box to filter Lambda functions with the project prefix (e.g., `MusicStore-` or `AppSingleTable-`).
+> *   **Step 4:** Take a screenshot of this list displaying all Lambda functions deployed to AWS (such as ProductService, OrderService, CheckoutService,...).
+> *   **Recommended image filename to save:** `/static/images/5-Workshop/lambda_functions_list.png`
+
+**Step 2: Initialize API Gateway**
+Create a REST API to route requests to the Lambda Functions.
+
+![API Gateway Routes Tree](/images/5-Workshop/api_gateway_routes.png)
+*Figure 5: Tree structure and configuration of API Gateway routes*
+
+---
+
+### Define CDK Stack for Compute & API Gateway
+Create the file `lib/api-stack.ts` to implement API Gateway, configure Lambda integrations, and set up corresponding permissions:
+
 ```typescript
 import * as cdk from 'aws-cdk-lib';
 import * as lambda from 'aws-cdk-lib/aws-lambda';
