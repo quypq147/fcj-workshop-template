@@ -5,17 +5,17 @@ weight: 2
 chapter: false
 pre: " <b> 5.2. </b> "
 ---
-# Chuẩn bị môi trường & Khởi tạo dự án
+# Chuẩn bị & Khởi tạo
 
-### 1. Các công cụ cần thiết
-Trước khi bắt đầu, hãy đảm bảo bạn đã cài đặt các công cụ sau:
-*   **Node.js** (LTS v18 hoặc v20)
-*   **AWS CLI v2** cấu hình thông tin qua `aws configure`
-*   **AWS CDK v2** cài đặt global: `npm install -g aws-cdk`
-*   **TypeScript** compiler: `npm install -g typescript`
+Trước khi tiến hành, hãy chuẩn bị môi trường:
+*   Cài đặt Node.js, AWS CLI và AWS CDK.
+*   Cấu hình thông tin xác thực với AWS (dùng `aws configure`).
 
-### 2. Khởi tạo dự án
-Tạo một thư mục mới và khởi tạo ứng dụng CDK:
+![Thông tin tài khoản AWS](/images/5-Workshop/aws_configure_sts.png)
+*Hình 2: Cấu hình thông tin tài khoản AWS và kết quả kiểm tra danh tính (get-caller-identity)*
+
+### Khởi tạo dự án CDK
+Tạo một thư mục mới và khởi tạo ứng dụng CDK bằng ngôn ngữ TypeScript:
 ```bash
 mkdir ecommerce-platform-infra
 cd ecommerce-platform-infra

@@ -7,10 +7,12 @@ pre: " <b> 5.1. </b> "
 ---
 # Tổng quan Workshop
 
-### 1. Tại sao lựa chọn AWS CDK?
-Trước đây, Hạ tầng dưới dạng mã (IaC) phụ thuộc vào các tệp mẫu YAML/JSON tĩnh. **AWS CDK** cho phép các nhà phát triển định nghĩa tài nguyên đám mây bằng các ngôn ngữ lập trình quen thuộc như **TypeScript**. Điều này mang lại tính năng kiểm tra kiểu dữ liệu mạnh mẽ, gợi ý mã tự động, tính kế thừa và tái sử dụng mã vào định nghĩa hạ tầng đám mây.
+**Bối cảnh & Bài toán:**
+Workshop này mô phỏng quá trình xây dựng một nền tảng thương mại điện tử phi máy chủ (Serverless) trên AWS, tích hợp Frontend bằng Next.js. Mục tiêu nhằm giải quyết bài toán mở rộng linh hoạt trong các đợt cao điểm, tối ưu hóa chi phí và giảm công sức quản trị hạ tầng.
 
-### 2. Kiến trúc Serverless hướng sự kiện
-Các ứng dụng web hiện đại yêu cầu độ tin cậy và tối ưu chi phí tối đa. Workshop này trình bày một **Kiến trúc Serverless hướng sự kiện (Event-Driven)** tự động co giãn để xử lý các đợt lưu lượng tăng đột biến và đảm bảo tính sẵn sàng cao mà không cần quản trị máy chủ thực tế.
+**Sơ đồ Kiến trúc giải pháp (Mục tiêu):**
+Dưới đây là sơ đồ kiến trúc tổng quan của dự án, minh họa luồng đi từ người dùng qua Route 53, đến AWS Amplify, API Gateway và xử lý backend qua các dịch vụ Serverless:
 
-Chúng ta sẽ sử dụng Amazon API Gateway cho các REST endpoint, AWS Lambda cho việc tính toán serverless, Amazon DynamoDB để lưu trữ dữ liệu dạng Single-Table có khả năng mở rộng cao, Amazon SQS cho việc xếp hàng đợi tin nhắn và Amazon EventBridge để định tuyến sự kiện tùy chỉnh.
+![AWS Serverless E-Commerce Architecture](/images/5-Workshop/architecture.png)
+*Hình 1: Sơ đồ kiến trúc hệ thống E-commerce Serverless dự án FCAJ*
+

@@ -5,11 +5,30 @@ weight: 4
 chapter: false
 pre: " <b> 5.4. </b> "
 ---
-# Module 2: Compute & API Gateway (Tính toán & Giao diện API)
+# Module 2: Compute & API Gateway
 
-Thiết lập Lambda function và liên kết với API Gateway. Vì sử dụng kiến trúc Serverless thuần túy, Lambda sẽ chạy ở chế độ mặc định trên mạng AWS, cho phép gọi trực tiếp tới DynamoDB một cách nhanh chóng.
+**Bước 1: Viết và cấu hình AWS Lambda Services & SQS**
+Thiết lập các Lambda Function nghiệp vụ (Product Service, Order Service, Checkout Service). Sử dụng SQS Order Queue làm buffer trước khi Lambda xử lý đơn hàng để chống quá tải.
 
-Tạo tệp `lib/api-stack.ts`:
+> 📸 **[HƯỚNG DẪN CHỤP ẢNH THỰC TẾ 4 - DANH SÁCH LÂM BDA FUNCTIONS]**
+> *   **Bước 1:** Trên AWS Console, truy cập dịch vụ **AWS Lambda**.
+> *   **Bước 2:** Nhấp vào mục **Functions** ở menu bên trái.
+> *   **Bước 3:** Sử dụng ô tìm kiếm để lọc các Lambda function có tiền tố của dự án (ví dụ: `MusicStore-` hoặc `AppSingleTable-`).
+> *   **Bước 4:** Chụp màn hình danh sách này hiển thị đầy đủ tên các hàm Lambda đã được deploy lên AWS (như ProductService, OrderService, CheckoutService,...).
+> *   **Tên file ảnh khuyến nghị lưu:** `/static/images/5-Workshop/lambda_functions_list.png`
+
+**Bước 2: Khởi tạo API Gateway**
+Tạo REST API định tuyến request đến các Lambda Function.
+
+![Cây thư mục routes trên API Gateway](/images/5-Workshop/api_gateway_routes.png)
+*Hình 5: Cây thư mục và cấu trúc các Route của API Gateway*
+
+---
+
+
+### Định nghĩa CDK Stack cho Compute & API Gateway
+Tạo tệp `lib/api-stack.ts` triển khai API Gateway, cấu hình tích hợp Lambda và phân quyền tương ứng:
+
 ```typescript
 import * as cdk from 'aws-cdk-lib';
 import * as lambda from 'aws-cdk-lib/aws-lambda';
@@ -83,4 +102,5 @@ export class ApiStack extends cdk.Stack {
   }
 }
 ```
+
 ---

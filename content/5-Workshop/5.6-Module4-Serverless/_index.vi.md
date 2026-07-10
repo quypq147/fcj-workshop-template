@@ -6,7 +6,7 @@ chapter: false
 pre: " <b> 5.6. </b> "
 ---
 
-# Module 4: Hạ tầng Serverless Backend & Lập trình ứng dụng với AWS SDK v3
+# Module 4: Serverless Backend & Observability
 
 Trong phần này, bạn sẽ triển khai logic tiếp nhận dữ liệu và xử lý sự kiện bất đồng bộ (Asynchronous Data Ingestion & Event Processing) sử dụng **AWS SDK v3** viết bằng TypeScript. Kiến trúc này sử dụng mô hình hướng sự kiện (Event-Driven Architecture) thông qua API Gateway, AWS Lambda, DynamoDB (Single-Table Design), Amazon SQS, DLQ và Amazon EventBridge.
 
@@ -457,3 +457,8 @@ Theo dõi luồng request đi xuyên suốt từ API Gateway -> SQS -> Lambda ->
    ```
 3. **Phân tích Trace Map**:
    Truy cập AWS Console -> **CloudWatch** -> **X-Ray traces** -> **Service map**. Bản đồ sẽ hiển thị rõ ràng đường đi của request, thời gian trễ (latency), tỷ lệ lỗi của từng node trong mạng lưới.
+
+![Sơ đồ truy vết AWS X-Ray Service Map](/images/5-Workshop/xray_service_map.png)
+*Hình 7: Sơ đồ Service Map hiển thị luồng liên kết giữa các dịch vụ trong CloudWatch X-Ray*
+
+

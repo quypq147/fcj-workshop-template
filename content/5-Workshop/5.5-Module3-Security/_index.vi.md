@@ -5,11 +5,31 @@ weight: 5
 chapter: false
 pre: " <b> 5.5. </b> "
 ---
-# Module 3: Security & Permissions (Bảo mật & Phân quyền)
+# Module 3: Security & Permissions
 
-Thiết lập Cognito User Pool cho đăng nhập và tạo các chính sách IAM chi tiết tuân theo nguyên tắc phân quyền tối thiểu (Least Privilege).
+**Bước 1: Quản lý danh tính với Amazon Cognito & Authorizer**
+Tạo Cognito User Pool. Tích hợp Cognito Authorizer vào API Gateway để bảo vệ các route nhạy cảm.
 
-Tạo tệp `lib/security-stack.ts`:
+![Cognito Authorizer trên API Gateway](/images/5-Workshop/cognito_authorizer.png)
+*Hình 6: Cấu hình Cognito Authorizer bảo vệ API*
+
+**Bước 2: Bảo vệ ứng dụng với AWS WAF & IAM Least Privilege**
+Lưu Stripe Secret Key vào AWS Secrets Manager. Phân quyền IAM Role độc lập cho từng Lambda. Cấu hình WAF để chặn bot và rate limit.
+
+> 📸 **[HƯỚNG DẪN CHỤP ẢNH THỰC TẾ 7 - AWS WAF WEB ACL RULES]**
+> *   **Bước 1:** Trên AWS Console, mở dịch vụ **WAF & Shield**.
+> *   **Bước 2:** Chọn **Web ACLs** ở thanh điều hướng bên trái và chọn vùng của bạn (`ap-southeast-1` Singapore hoặc `Global CloudFront` tùy theo cấu hình của bạn).
+> *   **Bước 3:** Chọn Web ACL tương ứng với dự án (ví dụ: `MusicStoreWebACL` hoặc `AppWebACL`).
+> *   **Bước 4:** Chuyển sang tab **Rules** (Quy tắc).
+> *   **Bước 5:** Thực hiện chụp màn hình danh sách các quy tắc (ví dụ: Core rule set, SQL injection rule set, rate-limiting rule...) đang được kích hoạt và áp dụng để bảo vệ API Gateway/Amplify.
+> *   **Tên file ảnh khuyến nghị lưu:** `/static/images/5-Workshop/waf_web_acls.png`
+
+---
+
+
+### Định nghĩa CDK Stack cho Security
+Tạo tệp `lib/security-stack.ts` để cấu hình User Pool và phân quyền tối thiểu IAM:
+
 ```typescript
 import * as cdk from 'aws-cdk-lib';
 import * as cognito from 'aws-cdk-lib/aws-cognito';
@@ -57,3 +77,4 @@ export class SecurityStack extends cdk.Stack {
   }
 }
 ```
+
